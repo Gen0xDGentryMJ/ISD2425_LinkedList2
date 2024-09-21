@@ -11,10 +11,13 @@ typedef struct node *address;
 typedef struct node{
 	string namaPlanet;
 	int jarakDariBumi;
-	string SDA;
+	string material;
 	address	next;
 }Planet;
 
 typedef struct{
 	address first;
 }List;
+
+void createEmpty(List *L);
+address alokasi(string nama, int jarak, string material);
