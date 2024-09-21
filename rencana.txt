@@ -1,0 +1,22 @@
+dari 5 kelas jelas menggunakan CRUD
+Create 
+Read 
+Update 
+Delete
+
+menekankan Insert After dan Delete After
+
+yang penting2 
+out of the box? 
+ppt dan modul 
+
+leetcode 
+strukdata di internet 
+
+nest ande prev
+
+menjebak
+
+ide:
+- kereta
+- roket
