@@ -8,10 +8,13 @@ typedef char string[64];
 
 typedef struct node *address;
 
-typedef struct node{
+typedef struct{
 	string namaPlanet;
 	int jarakDariBumi;
-	string material;
+	string material;	
+}Data;
+typedef struct node{
+	Data data;
 	address	next;
 }Planet;
 
@@ -20,4 +23,13 @@ typedef struct{
 }List;
 
 void createEmpty(List *L);
+bool isEmpty(List L);
 address alokasi(string nama, int jarak, string material);
+void insertFirst(List *L, address newNode);
+void insertLast(List *L, address newNode);
+void insertAfter(address before, address newNode);
+void deleteFirst(List *L);
+void deleteAt(List *L, address del);
+void deleteLast(List *L);
+int nbList(List L);
+void printData(List L);

@@ -1,8 +1,3 @@
-#include "header.h"
-
-void createEmpty(List *L){
-	L->first = NULL;
-}
 
 bool isEmpty(List L){
 	return L.first == NULL;
@@ -87,14 +82,3 @@ int nbList(List L){
 }
 
 void printData(List L){
-    address P = L.first;
-    int i;
-    for(i=0;i<=nbList(L)+1;i++){
-    	if(i==0||P==NULL||i==nbList(L)+1){
-			printf("\n\t[%d]",i);	
-		}else{
-			printf("\n\t[%d] %s - %s => Rp. %.0f",i,P->data.jarakDariBumi,P->data.namaPlanet,P->data.material);
-			P=P->next;
-		}
-	}
-}
