@@ -8,17 +8,35 @@ bool isEmpty(List L){
 	return L.first == NULL;
 }
 
+bool isOneElement(List L){
+    return !isEmpty(L)&&L.first->next==NULL;
+}
+
+//Data input(string nama, int jarak, string material){
+//	Data d;
+//	d.jarakDariBumi = jarak;
+//	strcpy(d.namaPlanet, nama);
+//	strcpy(d.material, material);
+//	return d;
+//}
 address alokasi(string nama, int jarak, string material){
 	address temp;
-	strcpy(temp->data.namaPlanet, nama);
-	temp->data.jarakDariBumi = jarak;
-	strcpy(temp->data.material, material);
+	printf("\ncrashed");
+	temp = (Planet*) malloc(sizeof(Planet));
+//	temp->data = input(nama, jarak, material);
+	strcpy(temp->material,material);
+	strcpy(temp->namaPlanet,nama);
+	temp->jarakDariBumi=jarak;
+	temp->next=NULL;
+	printf("\ncrashed");
 	return temp;
 }
 
 void insertFirst(List *L, address newNode){
+	printf("\ncrashed2");
 	newNode->next = L->first;
 	L->first = newNode;
+	printf("\ncrashed3");
 }
 
 void insertLast(List *L, address newNode){
@@ -85,15 +103,16 @@ int nbList(List L){
 	}
 	return count;
 }
-
+ 
 void printData(List L){
     address P = L.first;
+
     int i;
-    for(i=0;i<=nbList(L)+1;i++){
+    for(i=0;i<=nbList(L);i++){
     	if(i==0||P==NULL||i==nbList(L)+1){
 			printf("\n\t[%d]",i);	
 		}else{
-			printf("\n\t[%d] %s - %s => Rp. %.0f",i,P->data.jarakDariBumi,P->data.namaPlanet,P->data.material);
+			printf("\n\t[%d] %d - %s => %s",i,P->jarakDariBumi,P->namaPlanet,P->material);
 			P=P->next;
 		}
 	}
