@@ -3,11 +3,9 @@
 void createEmpty(List *L){
 	L->first = NULL;
 }
-
 bool isEmpty(List L){
 	return L.first == NULL;
 }
-
 bool isOneElement(List L){
     return !isEmpty(L)&&L.first->next==NULL;
 }
@@ -29,7 +27,6 @@ void insertFirst(List *L, address newNode){
 	newNode->next = L->first;
 	L->first = newNode;
 }
-
 void insertLast(List *L, address newNode){
 	address temp = L->first;
 	if(isEmpty(*L)){
@@ -41,14 +38,12 @@ void insertLast(List *L, address newNode){
 		temp->next = newNode;
 	}
 }
-
 void insertAfter(address before, address newNode){
     if(before!=NULL){
         newNode->next = before->next;
         before->next = newNode;
     }
 }
-
 void deleteFirst(List *L){
     if(!isEmpty(*L)){
         address del = (*L).first;
@@ -84,7 +79,6 @@ void deleteLast(List *L){
         }
     }
 }
-
 int nbList(List L){
 	int count=0;
 	address p = L.first;
@@ -165,7 +159,6 @@ void swapping1(List *L){
 	address curr = L->first;
 	address prev = NULL;
 	
-	
 	while (curr != NULL) {
         if (curr->jarakDariBumi > highest->jarakDariBumi) {
             highest = curr; 
@@ -184,7 +177,7 @@ void swapping1(List *L){
     } else if (lowest == L->first) {
         L->first = highest;
     }
-    
+	
 	if(prevHighest == lowest){
 		//berarti lowest bersebelahan sebelum highest
 		address temp = highest->next;
@@ -208,9 +201,11 @@ void swapping1(List *L){
 	    address temp = highest->next;
 	    highest->next = lowest->next;
 	    lowest->next = temp;
+		
 	    if (prevHighest != NULL) prevHighest->next = lowest;
 	    if (prevLowest != NULL) prevLowest->next = highest;
 	}
+	
+    
 }
-
 

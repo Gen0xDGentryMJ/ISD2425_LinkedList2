@@ -1,7 +1,7 @@
 #include "header.h"
 
 int main(int argc, char *argv[]) {
-	List L;
+	List L, history;
 	char menu;
 	string nama, status;
 	address before;
@@ -10,6 +10,7 @@ int main(int argc, char *argv[]) {
 	int jarak, bil;
 	
 	createEmpty(&L);
+	createEmpty(&history);
 	do{
 		system("cls");
 		printData(L);
@@ -18,9 +19,10 @@ int main(int argc, char *argv[]) {
 		printf("\n\t[2]. Hitung Data");
 		printf("\n\t[3]. Hapus Planet");
 		printf("\n\t[4]. Kesimpulan");
+		printf("\n\t[5]. History Senyawa");
 		printf("\n\t------------------------------");
-		printf("\n\t[5]. Reverse List [Bonus]");//reverse list yaaa reverse list
-		printf("\n\t[6]. Swap Dari Jarak [Tugas]");//Swap jarak terpendek dengan jarak terpanjang
+		printf("\n\t[6]. Reverse List [Bonus]");//reverse list yaaa reverse list
+		printf("\n\t[7]. Swap Dari Jarak [Tugas]");//Swap jarak terpendek dengan jarak terpanjang
 		
 		printf("\n\t[0]. Keluar");
 		printf("\n\t>>> ");menu = getche();
@@ -106,6 +108,7 @@ int main(int argc, char *argv[]) {
 					
 					if(menu == 'y'|| menu == 'Y'){
 						printf("\n\t[!] Planet %s telah di hapus [!]",before->namaPlanet);
+						insertLast(&L,before);
 						if(before == L.first){
 							deleteFirst(&L);
 						}else if(before->next==NULL){
@@ -128,6 +131,13 @@ int main(int argc, char *argv[]) {
 				}
 				break;
 			case '5':
+				if(!isEmpty(history)){
+					printHistoryData(history);
+				}else{
+					printf("\n\t[!] Masukan Data Telebih Dahulu [!]");
+				}
+				break;
+			case '6':
 				if(isEmpty(L)){
 					printf("\n\t[!] Masukan Data Telebih Dahulu [!]");
 				}else if(isOneElement(L)){
@@ -137,7 +147,7 @@ int main(int argc, char *argv[]) {
 					printf("\n\tBerhasil Reverse");
 				}
 				break;
-			case '6':
+			case '7':
 				if(isEmpty(L)){
 					printf("\n\t[!] Masukan Data Telebih Dahulu [!]");
 				}else if(isOneElement(L)){
@@ -148,7 +158,7 @@ int main(int argc, char *argv[]) {
 				}
 				break;
 			case '0':
-				printf("\n\n\tSukses terus Mahasiswa [NAMA PRAKTIKAN] - [NPM]");//Gentry Marvelo Jusuf - 220711878
+				printf("\n\n\tSukses terus Penjelajah [NAMA PRAKTIKAN] - [NPM]");//Gentry Marvelo Jusuf - 220711878
 				break;
 			default:
 				printf("\n[!] Menu tidak Ditemukan [!]");
@@ -159,5 +169,4 @@ int main(int argc, char *argv[]) {
 	}while(menu!='0');
 	return 0;
 }
-
 

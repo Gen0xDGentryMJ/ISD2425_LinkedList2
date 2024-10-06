@@ -48,7 +48,7 @@ int findInsert(List L, Data data);
 Data geser(List L, Data d);
 
 //BONUS
-
+void deleteDupliAll(List *L);
 //TUGAS
 void swapping1(List *L);
 

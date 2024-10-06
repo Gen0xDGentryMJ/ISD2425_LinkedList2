@@ -23,10 +23,10 @@ int main(int argc, char *argv[]) {
 		printf("\n\t[2]. Tampilkan Gerbong ");//read
 		/* menampilkannya seperti model kereta seperti [0] -> [tipeGerbong-nomorGerbong] -> [||||] */
 		printf("\n\t[3]. Servis Gerbong");//
-		printf("\n\t[4]. Servis Gerbong");//
+		printf("\n\t[4]. Update Gerbong");//
 		printf("\n\t[5]. Hapus Gerbong");//delete //submenu 0->DeleteFirst, 1->DeleteAt, 2->DeleteLast
 		printf("\n\t------------------------------");
-		printf("\n\t[6]. Hapus Duplikat [Bonus]");//delete duplicate kalau tipe gerbong dan id/nomorGerbong yang sama
+		printf("\n\t[6]. Delete Duplikat [Bonus]");//delete duplicate kalau tipe gerbong dan id/nomorGerbong yang sama
 		printf("\n\t[7]. Swap High & Low [Tugas]");//Swap jarak terpendek dengan jarak terpanjang
 		
 		printf("\n\t[0]. Keluar");
@@ -52,7 +52,7 @@ int main(int argc, char *argv[]) {
 						if(strcmpi(tipe,"Ekonomi")==0 || strcmpi(tipe,"Bisnis")==0 || strcmpi(tipe,"Eksekutif")==0){
 							break;
 						}else{
-							printf("\n\t[!] Invalid Tipe Gerbong hanya bisa Ekonomi, Bisnis, Atau Eksekutif [!]")
+							printf("\n\t[!] Invalid Tipe Gerbong hanya bisa Ekonomi, Bisnis, Atau Eksekutif [!]");
 						}
 					}else{
 						//kondisi tipe salah
@@ -70,29 +70,18 @@ int main(int argc, char *argv[]) {
 						printf("\n\t[!] Invalid, Kapasitas Gerbong Tidak Boleh Lebih Kecil dari 1 [!]");
 					}
 				}while(1);
-//				do{
-//					//status
-//					printf("\n\tMasukan Status Planet[Aman|Bahaya|Mematikan]: ");fflush(stdin);gets(status);
-//					if(strcmpi(status,"aman")==0||strcmpi(status,"bahaya")==0||strcmpi(status,"mematikan")==0){
-//						//kondisi status benar
-//						break;
-//					}else{
-//						//kondisi status salah
-//						printf("\n\t[!] Invalid, Status hanya bisa Aman, Bahaya, atau Mematikan [!]");
-//					}
-//				}while(1);
 				
 				if(bil==0){
-					insertFirst(&L, alokasi(nomor,tipe,harga,kapasitas);)
+					insertFirst(&L, alokasi(nomor,tipe,harga,kapasitas));
 				}else if(!isEmpty(L)&&nbList(L)>1&&bil<nbList(L)){
 					printf("\n\tNama Planet yang ingin disisipkan: "); fflush(stdin); gets(temp);
 					address before = findNodePlanet(L, temp);
 					if(strlen(temp)==0||before==NULL){
 						printf("\n\tInvalid");
 					}
-					insertAfter(before, alokasi(nama, jarak, status));
+					insertAfter(before, alokasi((nomor,tipe,harga,kapasitas)));
 				}else{
-					insertLast(&L, alokasi(nama, jarak, status));
+					insertLast(&L, alokasi((nomor,tipe,harga,kapasitas)));
 				}
 				printf("\n\tData Inserted");
 				

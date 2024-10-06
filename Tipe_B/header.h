@@ -43,5 +43,3 @@ address ReverseList(List L);
 
 //Tugas
 void swapping1(List *L);
-
-
