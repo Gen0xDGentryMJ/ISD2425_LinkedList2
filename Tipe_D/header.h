@@ -9,13 +9,12 @@ typedef char string[64];
 typedef struct node *address;
 
 typedef struct node{
-	string namaPlanet;// contoh: bumi, mars, jupiter
-	//nama tidak boleh kosong atau -
-	int jarakDariBumi;// dihitung /km, contoh: input 1 => tampilan 1 km
-	//jarak tidak boleh lebih kecil dari 1 (input minimal 1)
-	string status;//status ada 3(aman, berbahaya, mematikan)
+	int nomorGerbong;
+	string tipeGerbong; 
+	float hargaTiket;
+	int kapasitas;
 	address	next;
-}Planet;
+}Gerbong;
 
 typedef struct{
 	address first;
@@ -24,7 +23,8 @@ typedef struct{
 void createEmpty(List *L);
 bool isEmpty(List L);
 bool isOneElement(List L);
-address alokasi(string nama, int jarak, string status);
+
+address alokasi(int nomor, string tipe, float harga, int kapasitas);
 
 void insertFirst(List *L, address newNode);
 void insertAfter(address before, address newNode);
@@ -35,12 +35,15 @@ void deleteAt(List *L, address del);
 void deleteLast(List *L);
 
 int nbList(List L);
-address findNodePlanet(List L, string nama);
+
+address findNode(List L, string tipe, int nomor);
 void printData(List L);
 void kesimpulan(List L);
+
 //BONUS
 address ReverseList(List L);
 
 //Tugas
 void swapping1(List *L);
+
 

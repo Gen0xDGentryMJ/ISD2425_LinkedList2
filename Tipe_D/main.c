@@ -1,28 +1,33 @@
 #include "header.h"
 
 int main(int argc, char *argv[]) {
-	List L, history;
+	List L;
 	char menu;
-	string nama, status;
-	address before;
-	string temp;
 	
-	int jarak, bil;
+	int nomor;
+	string tipe;
+	int kapasitas;
+	float harga;
+	
+	string temp;
+	int bil;
+	
+	address before;
 	
 	createEmpty(&L);
-	createEmpty(&history);
 	do{
 		system("cls");
 		printData(L);
-		printf("\n\n\t[Menu Angkasa AtmaCorp]\n");
-		printf("\n\t[1]. Input Planet");
-		printf("\n\t[2]. Hitung Data");
-		printf("\n\t[3]. Hapus Planet");
-		printf("\n\t[4]. Kesimpulan");
-		printf("\n\t[5]. History Senyawa");
+		printf("\n\n\t[Menu Stasiun Atma]\n");
+		printf("\n\t[1]. Input Gerbong");//create 
+		printf("\n\t[2]. Tampilkan Gerbong ");//read
+		/* menampilkannya seperti model kereta seperti [0] -> [tipeGerbong-nomorGerbong] -> [||||] */
+		printf("\n\t[3]. Servis Gerbong");//
+		printf("\n\t[4]. Servis Gerbong");//
+		printf("\n\t[5]. Hapus Gerbong");//delete //submenu 0->DeleteFirst, 1->DeleteAt, 2->DeleteLast
 		printf("\n\t------------------------------");
-		printf("\n\t[6]. Reverse List [Bonus]");//reverse list yaaa reverse list
-		printf("\n\t[7]. Swap Dari Jarak [Tugas]");//Swap jarak terpendek dengan jarak terpanjang
+		printf("\n\t[6]. Hapus Duplikat [Bonus]");//delete duplicate kalau tipe gerbong dan id/nomorGerbong yang sama
+		printf("\n\t[7]. Swap High & Low [Tugas]");//Swap jarak terpendek dengan jarak terpanjang
 		
 		printf("\n\t[0]. Keluar");
 		printf("\n\t>>> ");menu = getche();
@@ -40,41 +45,45 @@ int main(int argc, char *argv[]) {
 				}
 				
 				do{
-					//nama
-					printf("\n\tMasukan Nama Planet: ");fflush(stdin);gets(nama);
-					if(strcmpi(nama,"-")!=0 && strlen(nama)!=0){
-						//kondisi nama benar
-						break;
+					//tipe Gerbong
+					printf("\n\tMasukan Tipe Gerbong: ");fflush(stdin);gets(tipe);
+					if(strcmpi(tipe,"-")!=0 && strlen(tipe)!=0){
+						//kondisi tipe benar
+						if(strcmpi(tipe,"Ekonomi")==0 || strcmpi(tipe,"Bisnis")==0 || strcmpi(tipe,"Eksekutif")==0){
+							break;
+						}else{
+							printf("\n\t[!] Invalid Tipe Gerbong hanya bisa Ekonomi, Bisnis, Atau Eksekutif [!]")
+						}
 					}else{
-						//kondisi nama salah
-						printf("\n\t[!] Invalid, Nama tidak boleh Kosong atau - [!]");
-					}
-				}while(1);
-				do{
-					//jarak
-					printf("\n\tMasukan Jarak Planet Dari Bumi: ");scanf("%d",&jarak);
-					if(jarak>0){
-						//kondisi jarak benar
-						break;
-					}else{
-						//kondisi jarak salah
+						//kondisi tipe salah
 						printf("\n\t[!] Invalid, Jarak Tidak Boleh Lebih Kecil dari 1 [!]");
 					}
 				}while(1);
 				do{
-					//status
-					printf("\n\tMasukan Status Planet[Aman|Bahaya|Mematikan]: ");fflush(stdin);gets(status);
-					if(strcmpi(status,"aman")==0||strcmpi(status,"bahaya")==0||strcmpi(status,"mematikan")==0){
-						//kondisi status benar
+					//kapasitas
+					printf("\n\tMasukan Kapasitas Gerbong: ");scanf("%d",&kapasitas);
+					if(kapasitas>0){
+						//kondisi kapasitas benar
 						break;
 					}else{
-						//kondisi status salah
-						printf("\n\t[!] Invalid, Status hanya bisa [Aman], [Bahaya], atau [Mematikan] [!]");
+						//kondisi kapasitas salah
+						printf("\n\t[!] Invalid, Kapasitas Gerbong Tidak Boleh Lebih Kecil dari 1 [!]");
 					}
 				}while(1);
+//				do{
+//					//status
+//					printf("\n\tMasukan Status Planet[Aman|Bahaya|Mematikan]: ");fflush(stdin);gets(status);
+//					if(strcmpi(status,"aman")==0||strcmpi(status,"bahaya")==0||strcmpi(status,"mematikan")==0){
+//						//kondisi status benar
+//						break;
+//					}else{
+//						//kondisi status salah
+//						printf("\n\t[!] Invalid, Status hanya bisa Aman, Bahaya, atau Mematikan [!]");
+//					}
+//				}while(1);
 				
 				if(bil==0){
-					insertFirst(&L,alokasi(nama, jarak, status));
+					insertFirst(&L, alokasi(nomor,tipe,harga,kapasitas);)
 				}else if(!isEmpty(L)&&nbList(L)>1&&bil<nbList(L)){
 					printf("\n\tNama Planet yang ingin disisipkan: "); fflush(stdin); gets(temp);
 					address before = findNodePlanet(L, temp);
@@ -108,7 +117,6 @@ int main(int argc, char *argv[]) {
 					
 					if(menu == 'y'|| menu == 'Y'){
 						printf("\n\t[!] Planet %s telah di hapus [!]",before->namaPlanet);
-						insertLast(&L,before);
 						if(before == L.first){
 							deleteFirst(&L);
 						}else if(before->next==NULL){
@@ -124,15 +132,17 @@ int main(int argc, char *argv[]) {
 				}
 				break;
 			case '4':
-				if(!isEmpty(L)){
-					kesimpulan(L);
-				}else{
+				if(isEmpty(L)){
 					printf("\n\t[!] Masukan Data Telebih Dahulu [!]");
+				}else{
+					before =findNode(L, tipe, nomor);
+					deleteAt(&L, )
+					//masukin ke temp data
 				}
 				break;
 			case '5':
-				if(!isEmpty(history)){
-					printHistoryData(history);
+				if(!isEmpty(L)){
+					kesimpulan(L);
 				}else{
 					printf("\n\t[!] Masukan Data Telebih Dahulu [!]");
 				}
@@ -141,10 +151,9 @@ int main(int argc, char *argv[]) {
 				if(isEmpty(L)){
 					printf("\n\t[!] Masukan Data Telebih Dahulu [!]");
 				}else if(isOneElement(L)){
-					printf("\n\t[!] Tidak Bisa Melakukan Reverse List [!]");
+					printf("\n\t[!] Tidak Bisa Menukar Karena Data Hanya Satu [!]");
 				}else{
-					L.first = ReverseList(L);
-					printf("\n\tBerhasil Reverse");
+					//mengdelete data gerbong
 				}
 				break;
 			case '7':
@@ -153,8 +162,7 @@ int main(int argc, char *argv[]) {
 				}else if(isOneElement(L)){
 					printf("\n\t[!] Tidak Bisa Menukar Karena Data Hanya Satu [!]");
 				}else{
-					swapping1(&L);
-					printf("\n\tBerhasil Menukar");
+					//menukar Kapasitas terbanyak dengan kapasitas terdikit
 				}
 				break;
 			case '0':
@@ -169,4 +177,5 @@ int main(int argc, char *argv[]) {
 	}while(menu!='0');
 	return 0;
 }
+
 

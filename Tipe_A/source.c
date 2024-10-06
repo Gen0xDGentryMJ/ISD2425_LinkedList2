@@ -1,40 +1,47 @@
 #include "header.h"
 
 void createEmpty(List *L){
-    (*L).first = NULL;
+	L->first = NULL;
 }
 bool isEmpty(List L){
-    return L.first == NULL;
+	return L.first == NULL;
 }
 bool isOneElement(List L){
     return !isEmpty(L)&&L.first->next==NULL;
 }
-address alokasi(string bahan, string merk, float harga){
-    address p;
-    p = (node*)malloc(sizeof(node));
-    strcpy(p->b.bahan,bahan);
-    strcpy(p->b.merk,merk);
-    p->b.harga = harga;
-    p->next = NULL;
-    return p;
+
+address alokasi(string nama, int jarak, string status){
+	address temp;
+	
+	temp = (Planet*) malloc(sizeof(Planet));
+	
+	strcpy(temp->status,status);
+	strcpy(temp->namaPlanet,nama);
+	temp->jarakDariBumi=jarak;
+	temp->next=NULL;
+	
+	return temp;
 }
+
 void insertFirst(List *L, address newNode){
-    newNode->next = (*L).first;
-    (*L).first = newNode;
+	newNode->next = L->first;
+	L->first = newNode;
+}
+void insertLast(List *L, address newNode){
+	address temp = L->first;
+	if(isEmpty(*L)){
+		insertFirst(&(*L), newNode);
+	}else{
+		while(temp->next!=NULL){
+			temp = temp->next;
+		}
+		temp->next = newNode;
+	}
 }
 void insertAfter(address before, address newNode){
     if(before!=NULL){
         newNode->next = before->next;
         before->next = newNode;
-    }
-}
-void insertLast(List *L,address newNode){
-    address P;
-    if(isEmpty(*L)){
-        insertFirst(L,newNode);
-    }else{
-        for(P=(*L).first;P->next!=NULL;P=P->next);
-        P->next = newNode;
     }
 }
 void deleteFirst(List *L){
@@ -72,39 +79,6 @@ void deleteLast(List *L){
         }
     }
 }
-void printData(List L){
-    address P = L.first;
-    int i;
-    for(i=0;i<=nbList(L)+1;i++){
-    	if(i==0||P==NULL||i==nbList(L)+1){
-			printf("\n\t[%d]",i);	
-		}else{
-			printf("\n\t[%d] %s - %s => Rp. %.0f",i,P->b.merk,P->b.bahan,P->b.harga);
-			P=P->next;
-		}
-	}
-}
-
-address findNode(List L, int bil){
-    address cari=L.first;
-    int i;
-    for(i=1;i<bil;i++){
-    	cari=cari->next;
-	}
-    return cari;
-}
-address findMerk(List L, string merk){
-    address cari;
-    int i;
-    cari=L.first;
-    for(i=0;i<nbList(L);i++){
-    	if(strcmpi(cari->b.merk,merk)==0){
-    		break;
-		}
-    	cari=cari->next;
-	}
-    return cari;
-}
 int nbList(List L){
 	int count=0;
 	address p = L.first;
@@ -114,69 +88,220 @@ int nbList(List L){
 	}
 	return count;
 }
-//////////////////////////
-address findHighestData(List L){
-	address temp=L.first;
-	address high;
-	float tempharga;
-	tempharga = temp->b.harga;
-	while(temp->next!=NULL){
-		if(tempharga <= temp->next->b.harga){
-			tempharga = temp->next->b.harga;
-			high = temp->next;
+
+address findNodePlanet(List L, string nama){
+	address bantu = L.first;
+	while (bantu!=NULL)
+	{
+		if (strcmpi(bantu->namaPlanet, nama)==0){
+			return bantu;
 		}
-		temp = temp->next;
+		bantu=bantu->next;
 	}
-	return high;
+	return bantu;
 }
 
-address findLowestData(List L){
-	address temp=L.first;
-	address low=temp;
-	
-	while(temp->next!=NULL){
-		if(temp->b.harga >= temp->next->b.harga){
-			low = temp->next;
-		}
-		temp = temp->next;
-	}
-	return low;
-}
-void kesimpulan(List *L){
-	address temp, high, low;
-	
-	temp = (*L).first;
-	high = findHighestData((*L));
-	low = findLowestData((*L));
-	
-	
-	printf("\n\tBaju dengan harga tertinggi adalah dengan merk : %s",high->b.merk);
-//	printf("\n\tBaju dengan harga terendah adalah dengan merk : %s",low->b.merk);
-	printf("\n\tMerk baju tersebut sekarang diubah menjadi %s",low->b.merk);
-	printf("\n");
-	
-	if(isOneElement((*L))){
-		printf("\n[+] Baju termahal dan termurah, keren banget [+]");
-	}else{
-		if(low == (*L).first){
-			(*L).first = low->next;
+void printData(List L){
+    address P = L.first;
+
+    int i;
+    for(i=0;i<=nbList(L);i++){
+    	if(i==0||P==NULL||i==nbList(L)+1){
+			printf("\n\t[%d]",i);	
 		}else{
-			while(temp->next!=low){
-				temp = temp->next;
-			}temp->next=low->next;
+			printf("\n\t[%d] %d km - %s => %s",i,P->jarakDariBumi,P->namaPlanet,P->status);
+			P=P->next;
 		}
-		low->next = high->next;
-		high->next = low;	
-		printf("\n[+] Baju dengan harga terendah sudah dipindah!");
 	}
 }
 
-//bubble sort
-/*
-	bajutemp = temp->b;
-	temp->b = temp->next->b;
-	temp->next->b = bajutemp;
-*/
+void kesimpulan(List L){
+	address high = L.first;
+	address low = L.first;
+	address curr = L.first;
+		
+	while (curr != NULL) {
+        if (curr->jarakDariBumi > high->jarakDariBumi) {
+            high = curr; 
+        }
+        if (curr->jarakDariBumi < low->jarakDariBumi) {
+            low = curr;
+        }
+        curr = curr->next;
+    }
+	
+	printf("\n\t Planet dengan jarak terjauh dari bumi: %s dengan biaya peluncuran sebesar Rp %.02d",high->namaPlanet, (high->jarakDariBumi * 15));
+	printf("\n\t Planet dengan jarak pendek dari bumi %s dengan biaya peluncuran sebesar Rp %.02d",low->namaPlanet, (low->jarakDariBumi * 15));
+}
+//BONUS
+address ReverseList(List L){
+	address prev = NULL;
+	address next = NULL;
+	address curr = L.first;
+	
+	while(curr!=NULL){
+		next = curr->next;
+		curr->next = prev;
+		prev = curr;
+		curr = next;
+	}
+	return prev;
+}
 
-
+//TUGAS
+void swapping1(List *L){
+	address prevHighest = NULL;
+	address prevLowest = NULL;
+	
+    address highest = L->first;
+	address lowest = L->first;
+    
+	address curr = L->first;
+	address prev = NULL;
+	
+		//apabila case:	
+		//100 jupiter aman 
+		//120 XXXXX XXXXX 
+		//110 XXXXX XXXXX 
+		//1000 pat bahaya 
+		//...
+		//...
+		
+		/*
+		case2
+		110 XXXXX XXXXX (ke 100 jupiter aman)
+		100 jupiter aman (ke 1000 pat bahaya)
+		1000 pat bahaya (ke 120 XXXXX XXXXX)
+		120 XXXXX XXXXX (ke NULL)
+	
+		*/
+		/*
+		case3
+		110 XXXXX XXXXX (ke 1000 pat bahaya)
+		1000 pat bahaya (ke 100 jupiter aman)
+		100 jupiter aman (ke 120 XXXXX XXXXX)
+		120 XXXXX XXXXX (ke NULL)
+	
+		*/
+		/*
+		case1
+		100 jupiter aman (ke 110 XXXXX XXXXX)
+		110 XXXXX XXXXX (ke 120 XXXXX XXXXX)
+		120 XXXXX XXXXX (ke 1000 pat bahaya)
+		1000 pat bahaya (ke NULL)
+	
+		*/
+		/*
+		case4
+		110 XXXXX XXXXX (ke 100 jupiter aman)
+		100 jupiter aman (ke 120 XXXXX XXXXX)
+		120 XXXXX XXXXX (ke 1000 pat bahaya)
+		1000 pat bahaya (ke NULL)
+	
+		*/
+	
+	while (curr != NULL) {
+        if (curr->jarakDariBumi > highest->jarakDariBumi) {
+            highest = curr; 
+            prevHighest = prev;
+        }
+        if (curr->jarakDariBumi < lowest->jarakDariBumi) {
+            lowest = curr;
+            prevLowest = prev;
+        }
+        prev = curr; 
+        curr = curr->next;
+    }
+    /*
+	case1
+	highest //1000
+	prevHighest //120 
+	lowest //100 
+	prevLowest //NULL
+	prev //1000
+	curr //NULL
+	*/
+	/*
+	case2
+	highest //1000
+	prevHighest //100 
+	lowest //100 jupiter aman 
+	prevLowest //110
+	prev //120
+	curr //NULL
+	*/
+	/*
+	case4
+	highest //1000
+	prevHighest //120 
+	lowest //100 
+	prevLowest //110
+	prev //1000
+	curr //NULL
+	*/
+    
+	
+	if (highest == L->first) {
+        L->first = lowest;
+    } else if (lowest == L->first) {
+        L->first = highest;
+    }
+	
+	if(prevHighest == lowest){
+		//berarti lowest bersebelahan sebelum highest
+		address temp = highest->next;
+	    highest->next = lowest->next;
+	    lowest->next = temp;
+		highest->next = lowest;
+		if (prevLowest != NULL) {
+        	prevLowest->next = highest;
+    	}
+	}else if(prevLowest == highest){
+		//berarti lowest bersebelahan sebelum highest
+		address temp = highest->next;
+	    highest->next = lowest->next;
+	    lowest->next = temp;
+		lowest->next = highest;
+		if (prevHighest != NULL) {
+        	prevHighest->next = lowest;
+    	}
+	}else{
+		// menukar pointer
+	    address temp = highest->next;
+	    highest->next = lowest->next;
+	    lowest->next = temp;
+		/*
+		case1
+		100 jupiter aman (ke NULL)
+		110 XXXXX XXXXX (ke 120 XXXXX XXXXX)
+		120 XXXXX XXXXX (ke 100 jupiter ama)
+		1000 pat bahaya (ke 110 XXXXX XXXXX, L->first)
+		*/
+		/*
+		case4
+		110 XXXXX XXXXX (ke 1000 pat bahaya)
+		100 jupiter aman (ke NULL)
+		120 XXXXX XXXXX (ke 100 jupiter aman)
+		1000 pat bahaya (ke 120 XXXXX XXXXX)
+		*/
+	    if (prevHighest != NULL) prevHighest->next = lowest;
+	    if (prevLowest != NULL) prevLowest->next = highest;
+    	/*
+		case1
+		1000 pat bahaya (ke 110 XXXXX XXXXX, L->first)
+		110 XXXXX XXXXX (ke 120 XXXXX XXXXX)
+		120 XXXXX XXXXX (ke 100 jupiter ama)
+		100 jupiter aman (ke NULL)
+		*/
+		/*
+		case4
+		110 XXXXX XXXXX (ke 1000 pat bahaya)
+		1000 pat bahaya (ke 120 XXXXX XXXXX)
+		120 XXXXX XXXXX (ke 100 jupiter aman)
+		100 jupiter aman (ke NULL)
+		*/
+	}
+	
+    
+}
 
