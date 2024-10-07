@@ -70,6 +70,20 @@ int main(int argc, char *argv[]) {
 					}
 				}while(1);
 				do{
+					//id
+					printf("\n\tMasukan Id Senyawa: ");scanf("%d",&bil);
+					if(bil>0){
+						//kondisi id benar
+						break;
+					}else{
+						//kondisi id salah
+						printf("\n\t[!] Invalid, Id Harus Lebih Besar dari 0 [!]\n");
+					}
+				}while(1);
+				sprintf(temp, "%d", bil);
+				strcat(kode,"-");
+				strcat(kode,temp);
+				do{
 					//berat
 					printf("\n\tMasukan Berat Senyawa: ");scanf("%d",&berat);
 					if(berat>0){

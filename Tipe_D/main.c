@@ -19,7 +19,7 @@ int main(int argc, char *argv[]) {
 		system("cls");
 		printData(L);
 		printf("\n\n\t[Menu Stasiun Atma]\n");
-		printf("\n\t[1]. Input Gerbong");//create 
+		printf("\n\t[1]. Input Gerbong");//create random insert
 		printf("\n\t[2]. Tampilkan Gerbong ");//read
 		/* menampilkannya seperti model kereta seperti [0] -> [tipeGerbong-nomorGerbong] -> [||||] */
 		printf("\n\t[3]. Servis Gerbong");//
@@ -79,9 +79,9 @@ int main(int argc, char *argv[]) {
 					if(strlen(temp)==0||before==NULL){
 						printf("\n\tInvalid");
 					}
-					insertAfter(before, alokasi((nomor,tipe,harga,kapasitas)));
+					insertAfter(before, alokasi(nomor,tipe,harga,kapasitas));
 				}else{
-					insertLast(&L, alokasi((nomor,tipe,harga,kapasitas)));
+					insertLast(&L, alokasi(nomor,tipe,harga,kapasitas));
 				}
 				printf("\n\tData Inserted");
 				

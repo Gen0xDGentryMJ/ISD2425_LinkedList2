@@ -221,7 +221,7 @@ void printHistoryData(List L){
 void deleteDupliAll(List *L){
 	address temp = L->first;
 	while(temp!=NULL){
-		if(strcmpi(temp->k.kodeSenyawa,temp->next->k.kodeSenyawa)==0&&strcmpi(temp->k.namaSenyawa,temp->next->k.namaSenyawa)==0){
+		if(strcmpi(temp->k.kodeSenyawa,temp->next->k.kodeSenyawa)==0){
 			
 			address toDelete = temp->next;
             temp->next = toDelete->next;

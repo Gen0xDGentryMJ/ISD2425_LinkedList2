@@ -3,33 +3,34 @@
 int main(int argc, char *argv[]) {
 	List L, history;
 	char menu;
-	string nama, status;
+	string nama;
+	string ukuran;
 	address before;
 	string temp;
 	
-	int jarak, bil;
+	int stok, bil;
 	
 	createEmpty(&L);
 	createEmpty(&history);
 	do{
 		system("cls");
 		printData(L);
-		printf("\n\n\t[Menu Angkasa AtmaCorp]\n");
-		printf("\n\t[1]. Input Planet");
+		printf("\n\n\t[Menu Belanja Mall Atma]\n");
+		printf("\n\t[1]. Input Baju");
 		printf("\n\t[2]. Hitung Data");
-		printf("\n\t[3]. Hapus Planet");
+		printf("\n\t[3]. Hapus Baju");
 		printf("\n\t[4]. Kesimpulan");
-		printf("\n\t[5]. History Senyawa");
+		printf("\n\t[5]. History Baju");
 		printf("\n\t------------------------------");
-		printf("\n\t[6]. Reverse List [Bonus]");//reverse list yaaa reverse list
-		printf("\n\t[7]. Swap Dari Jarak [Tugas]");//Swap jarak terpendek dengan jarak terpanjang
+		printf("\n\t[6]. Reverse List [Bonus]");
+		printf("\n\t[7]. Swap Dari stok [Tugas]");
 		
 		printf("\n\t[0]. Keluar");
 		printf("\n\t>>> ");menu = getche();
 
 		switch(menu){
 			case '1':
-				//input berdasarkan jarak
+				//input berdasarkan stok
 				system("cls");
 				printData(L);
 				printf("\n\n\tData ingin dimasukan di urutan : ");scanf("%d",&bil);//inputan berdasarkan urutan
@@ -41,7 +42,7 @@ int main(int argc, char *argv[]) {
 				
 				do{
 					//nama
-					printf("\n\tMasukan Nama Planet: ");fflush(stdin);gets(nama);
+					printf("\n\tMasukan Nama Baju: ");fflush(stdin);gets(nama);
 					if(strcmpi(nama,"-")!=0 && strlen(nama)!=0){
 						//kondisi nama benar
 						break;
@@ -51,39 +52,39 @@ int main(int argc, char *argv[]) {
 					}
 				}while(1);
 				do{
-					//jarak
-					printf("\n\tMasukan Jarak Planet Dari Bumi: ");scanf("%d",&jarak);
-					if(jarak>0){
-						//kondisi jarak benar
+					//stok
+					printf("\n\tMasukan Stok Baju: ");scanf("%d",&stok);
+					if(stok>0){
+						//kondisi stok benar
 						break;
 					}else{
-						//kondisi jarak salah
-						printf("\n\t[!] Invalid, Jarak Tidak Boleh Lebih Kecil dari 1 [!]");
+						//kondisi stok salah
+						printf("\n\t[!] Invalid, Stok Baju Tidak Boleh Lebih Kecil dari 1 [!]");
 					}
 				}while(1);
 				do{
-					//status
-					printf("\n\tMasukan Status Planet[Aman|Bahaya|Mematikan]: ");fflush(stdin);gets(status);
-					if(strcmpi(status,"aman")==0||strcmpi(status,"bahaya")==0||strcmpi(status,"mematikan")==0){
-						//kondisi status benar
+					//ukuran
+					printf("\n\tMasukan Ukuran Baju [ S | M | L | XL | XXL ]: ");fflush(stdin);gets(ukuran);
+					if(strcmpi(ukuran,"s")==0||strcmpi(ukuran,"m")==0||strcmpi(ukuran,"l")==0||strcmpi(ukuran,"xl")==0||strcmpi(ukuran,"xxl")==0){
+						//kondisi ukuran benar
 						break;
 					}else{
-						//kondisi status salah
-						printf("\n\t[!] Invalid, Status hanya bisa [Aman], [Bahaya], atau [Mematikan] [!]");
+						//kondisi ukuran salah
+						printf("\n\t[!] Invalid, ukuran hanya bisa [S], [M], [L], [XL], atau [XXL] [!]");
 					}
 				}while(1);
 				
 				if(bil==0){
-					insertFirst(&L,alokasi(nama, jarak, status));
+					insertFirst(&L,alokasi(nama, stok, ukuran));
 				}else if(!isEmpty(L)&&nbList(L)>1&&bil<nbList(L)){
-					printf("\n\tNama Planet yang ingin disisipkan: "); fflush(stdin); gets(temp);
-					address before = findNodePlanet(L, temp);
+					printf("\n\tNama Baju yang ingin disisipkan: "); fflush(stdin); gets(temp);
+					address before = findNodeBaju(L, temp);
 					if(strlen(temp)==0||before==NULL){
 						printf("\n\tInvalid");
 					}
-					insertAfter(before, alokasi(nama, jarak, status));
+					insertAfter(before, alokasi(nama, stok, ukuran));
 				}else{
-					insertLast(&L, alokasi(nama, jarak, status));
+					insertLast(&L, alokasi(nama, stok, ukuran));
 				}
 				printf("\n\tData Inserted");
 				
@@ -95,19 +96,19 @@ int main(int argc, char *argv[]) {
 			case '3':
 				//hanya bisa di akses ketika ada planet
 				if(nbList(L)>=1){
-					printf("\n\tNama Planet yang ingin dihapus: ");fflush(stdin);gets(nama);
-					before = findNodePlanet(L, nama);
+					printf("\n\tNama Baju yang ingin dihapus: ");fflush(stdin);gets(nama);
+					before = findNodeBaju(L, nama);
 					
 					if(before==NULL){
-						printf("\n\t[!] Nama Planet tidak ditemukan [!]");
+						printf("\n\t[!] Nama Baju tidak ditemukan [!]");
 						break;
 					}
 					
-					printf("\n\t[!] Yakin ingin menghapus Planet %s? [Y/N]",before->namaPlanet);
+					printf("\n\t[!] Yakin ingin menghapus Baju %s? [Y/N]",before->namaBaju);
 					printf("\n\t>>> ");scanf("%c",&menu);
 					
 					if(menu == 'y'|| menu == 'Y'){
-						printf("\n\t[!] Planet %s telah di hapus [!]",before->namaPlanet);
+						printf("\n\t[!] Baju %s telah di hapus [!]",before->namaBaju);
 						insertLast(&L,before);
 						if(before == L.first){
 							deleteFirst(&L);
@@ -117,7 +118,7 @@ int main(int argc, char *argv[]) {
 							deleteAt(&L,before);
 						}
 					}else{
-						printf("\n\t[!] Tidak Jadi Delete Data Planet [!]");
+						printf("\n\t[!] Tidak Jadi Delete Data Baju [!]");
 					}
 				}else{
 					printf("\n\t[!] Data Masih Kosong [!]");

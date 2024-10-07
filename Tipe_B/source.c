@@ -10,14 +10,14 @@ bool isOneElement(List L){
     return !isEmpty(L)&&L.first->next==NULL;
 }
 
-address alokasi(string nama, int jarak, string status){
+address alokasi(string nama, int stok, string ukuran){
 	address temp;
 	
-	temp = (Planet*) malloc(sizeof(Planet));
+	temp = (Baju*) malloc(sizeof(Baju));
 	
-	strcpy(temp->status,status);
-	strcpy(temp->namaPlanet,nama);
-	temp->jarakDariBumi=jarak;
+	strcpy(temp->ukuran,ukuran);
+	strcpy(temp->namaBaju,nama);
+	temp->stok=stok;
 	temp->next=NULL;
 	
 	return temp;
@@ -89,11 +89,11 @@ int nbList(List L){
 	return count;
 }
 
-address findNodePlanet(List L, string nama){
+address findNodeBaju(List L, string nama){
 	address bantu = L.first;
 	while (bantu!=NULL)
 	{
-		if (strcmpi(bantu->namaPlanet, nama)==0){
+		if (strcmpi(bantu->namaBaju, nama)==0){
 			return bantu;
 		}
 		bantu=bantu->next;
@@ -109,7 +109,7 @@ void printData(List L){
     	if(i==0||P==NULL||i==nbList(L)+1){
 			printf("\n\t[%d]",i);	
 		}else{
-			printf("\n\t[%d] %d km - %s => %s",i,P->jarakDariBumi,P->namaPlanet,P->status);
+			printf("\n\t[%d] %s - %s => %d",i,P->namaBaju,P->ukuran,P->stok);
 			P=P->next;
 		}
 	}
@@ -121,17 +121,17 @@ void kesimpulan(List L){
 	address curr = L.first;
 		
 	while (curr != NULL) {
-        if (curr->jarakDariBumi > high->jarakDariBumi) {
+        if (curr->stok > high->stok) {
             high = curr; 
         }
-        if (curr->jarakDariBumi < low->jarakDariBumi) {
+        if (curr->stok < low->stok) {
             low = curr;
         }
         curr = curr->next;
     }
 	
-	printf("\n\t Planet dengan jarak terjauh dari bumi: %s dengan biaya peluncuran sebesar Rp %.02d",high->namaPlanet, (high->jarakDariBumi * 15));
-	printf("\n\t Planet dengan jarak pendek dari bumi %s dengan biaya peluncuran sebesar Rp %.02d",low->namaPlanet, (low->jarakDariBumi * 15));
+	printf("\n\tBaju dengan Stok Tertinggi: %s dengan Jumlah sebesar Rp %.02d",high->namaBaju, high->stok);
+	printf("\n\tBaju dengan Stok Terendah : %s dengan Jumlah sebesar Rp %.02d",low->namaBaju, low->stok);
 }
 //BONUS
 address ReverseList(List L){
@@ -160,11 +160,11 @@ void swapping1(List *L){
 	address prev = NULL;
 	
 	while (curr != NULL) {
-        if (curr->jarakDariBumi > highest->jarakDariBumi) {
+        if (curr->stok > highest->stok) {
             highest = curr; 
             prevHighest = prev;
         }
-        if (curr->jarakDariBumi < lowest->jarakDariBumi) {
+        if (curr->stok < lowest->stok) {
             lowest = curr;
             prevLowest = prev;
         }

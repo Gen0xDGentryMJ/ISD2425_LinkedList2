@@ -88,7 +88,7 @@ void deleteLast(List *L){
 address findNode(List L, string tipe, int nomor){
 	address temp;
 	for(temp = L.first; temp!=NULL; temp=temp->next){
-		if(strcmpi(temp.tipeGerbong, tipe)==0 && temp.nomorGerbong == nomor){
+		if(strcmpi(temp->tipeGerbong, tipe)==0 && temp->nomorGerbong == nomor){
 			return temp;
 		}
 	}
