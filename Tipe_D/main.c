@@ -1,6 +1,8 @@
 #include "header.h"
 
 int main(int argc, char *argv[]) {
+	srand(time(NULL));
+
 	List L;
 	char menu;
 	
@@ -11,7 +13,7 @@ int main(int argc, char *argv[]) {
 	
 	string temp;
 	int bil;
-	
+	int randomizer;
 	address before;
 	
 	createEmpty(&L);
@@ -34,15 +36,15 @@ int main(int argc, char *argv[]) {
 
 		switch(menu){
 			case '1':
-				//input berdasarkan jarak
+				/*
+					int nomorGerbong;
+					string tipeGerbong; 
+					float hargaTiket;
+					int kapasitas;
+					address	next;
+				*/
 				system("cls");
 				printData(L);
-				printf("\n\n\tData ingin dimasukan di urutan : ");scanf("%d",&bil);//inputan berdasarkan urutan
-				
-				if(bil<0||bil>nbList(L)+1){
-					printf("\n\tUrutan Tidak Valid");
-					break;
-				}
 				
 				do{
 					//tipe Gerbong
@@ -60,6 +62,17 @@ int main(int argc, char *argv[]) {
 					}
 				}while(1);
 				do{
+					//nomor
+					printf("\n\tMasukan Nomor Gerbong: ");scanf("%d",&nomor);
+					if(nomor>0){
+						//kondisi nomor benar
+						break;
+					}else{
+						//kondisi nomor salah
+						printf("\n\t[!] Invalid, Nomor Gerbong Tidak Boleh Lebih Kecil dari 1 [!]");
+					}
+				}while(1);
+				do{
 					//kapasitas
 					printf("\n\tMasukan Kapasitas Gerbong: ");scanf("%d",&kapasitas);
 					if(kapasitas>0){
@@ -70,21 +83,33 @@ int main(int argc, char *argv[]) {
 						printf("\n\t[!] Invalid, Kapasitas Gerbong Tidak Boleh Lebih Kecil dari 1 [!]");
 					}
 				}while(1);
-				
-				if(bil==0){
+
+				if(strcmpi(tipe,"Ekonomi")==0){
+					harga = 150000 + (kapasitas * 10000);
+				}else if(strcmpi(tipe,"Eksekutif")==0){
+					harga = 225000 + (kapasitas * 15000);
+				}else{
+					harga = 300000 + (kapasitas * 20000);
+				}
+
+				randomizer=rand()%(2-0+1)+0;
+				if(randomizer==0){
 					insertFirst(&L, alokasi(nomor,tipe,harga,kapasitas));
-				}else if(!isEmpty(L)&&nbList(L)>1&&bil<nbList(L)){
-					printf("\n\tNama Planet yang ingin disisipkan: "); fflush(stdin); gets(temp);
-					address before = findNodePlanet(L, temp);
+					printf("\n\tData Inserted");
+				}else if(randomizer==1&&!isOneElement(L)){
+					randomizer = rand()%((nbList(L)-1)-1+1)+1;
+					address before = findNodeRandomizer(L, randomizer);
 					if(strlen(temp)==0||before==NULL){
-						printf("\n\tInvalid");
+						printf("\n\tInvalid Insert");
+						break;
+					}else{
+						insertAfter(before, alokasi(nomor,tipe,harga,kapasitas));
+						printf("\n\tData Inserted");
 					}
-					insertAfter(before, alokasi(nomor,tipe,harga,kapasitas));
 				}else{
 					insertLast(&L, alokasi(nomor,tipe,harga,kapasitas));
+					printf("\n\tData Inserted");
 				}
-				printf("\n\tData Inserted");
-				
 				break;
 			case '2':
 				//menghitung data planet beserta biaya pergi
@@ -92,7 +117,7 @@ int main(int argc, char *argv[]) {
 				break;
 			case '3':
 				//hanya bisa di akses ketika ada planet
-				if(nbList(L)>=1){
+				if(!isEmpty(L)){
 					printf("\n\tNama Planet yang ingin dihapus: ");fflush(stdin);gets(nama);
 					before = findNodePlanet(L, nama);
 					

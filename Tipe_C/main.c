@@ -107,7 +107,7 @@ int main(int argc, char *argv[]) {
 				}while(1);
 
 				display = alokasiData(nama,kode,berat,harga);
-				bil = findInsert(L,display);
+				bil = findInsert(L, display);
 
 				//autosorted linked list
 				if(bil==0){
@@ -116,9 +116,12 @@ int main(int argc, char *argv[]) {
 					printf("\n\tNama Senyawa yang ingin disisipkan: "); fflush(stdin); gets(temp);
 					address before = findNode(L, temp);
 					if(strlen(temp)==0||before==NULL){
-						printf("\n\tInvalid");
+						printf("\n\tInvalid Insert");
+						break;
+					}else{
+						insertAfter(before, alokasi(alokasiData(nama, kode, berat, harga)));
+						printf("\n\tData Inserted");
 					}
-					insertAfter(before, alokasi(alokasiData(nama, kode, berat, harga)));
 				}else if(bil == 2){
 					insertLast(&L, alokasi(alokasiData(nama, kode, berat, harga)));
 				}

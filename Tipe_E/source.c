@@ -84,15 +84,6 @@ void deleteLast(List *L){
     }
 }
 
-// int nbList(List L){
-// 	int count=0;
-// 	address p = L.first;
-// 	while(p!=NULL){
-// 		count+=1;
-// 		p = p->next;
-// 	}
-// 	return count;
-// }
 int findInsert(List L, Data data){
 	address temp = L.first;
 	//1-> data paling kecil 

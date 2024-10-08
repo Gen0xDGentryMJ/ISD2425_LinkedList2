@@ -80,9 +80,11 @@ int main(int argc, char *argv[]) {
 					printf("\n\tNama Baju yang ingin disisipkan: "); fflush(stdin); gets(temp);
 					address before = findNodeBaju(L, temp);
 					if(strlen(temp)==0||before==NULL){
-						printf("\n\tInvalid");
+						printf("\n\tInvalid Insert");
+						break;
+					}else{
+						insertAfter(before, alokasi(nama, stok, ukuran));
 					}
-					insertAfter(before, alokasi(nama, stok, ukuran));
 				}else{
 					insertLast(&L, alokasi(nama, stok, ukuran));
 				}

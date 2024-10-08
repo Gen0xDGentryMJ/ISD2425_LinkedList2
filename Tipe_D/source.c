@@ -95,6 +95,28 @@ address findNode(List L, string tipe, int nomor){
 	return temp;
 	
 }
+address findNodeRandomizer(List L, int i){
+	address temp;
+    int count=0;
+	for(temp = L.first; temp!=NULL; count++){
+        if(count==i){
+            return temp;
+        }
+		temp=temp->next;
+	}
+	return temp;
+	
+}
+int nbList(List L){
+	int count=0;
+	address p = L.first;
+	while(p!=NULL){
+		count+=1;
+		p = p->next;
+	}
+	return count;
+}
+
 void printData(List L){
 	
 }

@@ -75,18 +75,21 @@ int main(int argc, char *argv[]) {
 				
 				if(bil==0){
 					insertFirst(&L,alokasi(nama, jarak, status));
+					printf("\n\tData Inserted");
 				}else if(!isEmpty(L)&&nbList(L)>1&&bil<nbList(L)){
 					printf("\n\tNama Planet yang ingin disisipkan: "); fflush(stdin); gets(temp);
 					address before = findNodePlanet(L, temp);
 					if(strlen(temp)==0||before==NULL){
-						printf("\n\tInvalid");
+						printf("\n\tInvalid Insert");
+						break;
+					}else{
+						insertAfter(before, alokasi(nama, jarak, status));
+						printf("\n\tData Inserted");
 					}
-					insertAfter(before, alokasi(nama, jarak, status));
 				}else{
 					insertLast(&L, alokasi(nama, jarak, status));
+					printf("\n\tData Inserted");
 				}
-				printf("\n\tData Inserted");
-				
 				break;
 			case '2':
 				//menghitung data planet beserta biaya pergi

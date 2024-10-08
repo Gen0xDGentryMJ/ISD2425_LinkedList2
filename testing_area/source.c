@@ -12,26 +12,24 @@ bool isOneElement(List L){
     return !isEmpty(L)&&L.first->next==NULL;
 }
 
-address alokasi(string nama, int jarak, string status){
-	address temp;
-	
-	temp = (Planet*) malloc(sizeof(Planet));
-	
-	strcpy(temp->status,status);
-	strcpy(temp->namaPlanet,nama);
-	temp->jarakDariBumi=jarak;
-	temp->next=NULL;
-	
+address alokasi(Infotype X){
+	address temp = (*Nodes) malloc(sizeof(*Nodes));
+	temp->X = X;
+	temp->next = NULL;
 	return temp;
 }
 
+void createEmpty(List *L){
+	L->first = NULL;
+}
 void insertFirst(List *L, address newNode){
 	newNode->next = L->first;
 	L->first = newNode;
 }
 
-void insertLast(List *L, address newNode){
+void insertLast(List *L, Infotype x){
 	address temp = L->first;
+	address newNode;
 	if(isEmpty(*L)){
 		insertFirst(&(*L), newNode);
 	}else{
@@ -72,6 +70,7 @@ void deleteAt(List *L, address del){
         }
     }
 }
+
 void deleteLast(List *L){
     address P;
     if(!isEmpty(*L)){
@@ -95,11 +94,11 @@ int nbList(List L){
 	return count;
 }
 
-address findNodePlanet(List L, string nama){
+address findNode(List L, Infotype X){
 	address bantu = L.first;
 	while (bantu!=NULL)
 	{
-		if (strcmpi(bantu->namaPlanet, nama)==0){
+		if (bantu->X == X){
 			return bantu;
 		}
 		bantu=bantu->next;

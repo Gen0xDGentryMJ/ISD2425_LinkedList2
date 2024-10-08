@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <conio.h>
 #include <string.h>
+#include <time.h>
 
 typedef char string[64];
 
@@ -37,6 +38,7 @@ void deleteLast(List *L);
 int nbList(List L);
 
 address findNode(List L, string tipe, int nomor);
+address findNodeRandomizer(List L, int i);
 void printData(List L);
 void kesimpulan(List L);
 
