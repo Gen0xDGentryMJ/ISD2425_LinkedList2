@@ -39,7 +39,7 @@ int main(int argc, char *argv[]) {
 					printf("\n\tUrutan Tidak Valid");
 					break;
 				}
-				
+
 				do{
 					//nama
 					printf("\n\tMasukan Nama Baju: ");fflush(stdin);gets(nama);
@@ -161,7 +161,7 @@ int main(int argc, char *argv[]) {
 				}
 				break;
 			case '0':
-				printf("\n\n\tSukses terus Penjelajah [NAMA PRAKTIKAN] - [NPM]");//Gentry Marvelo Jusuf - 220711878
+				printf("\n\n\t Connection Lost User [NAMA PRAKTIKAN] - [NPM]");//Gentry Marvelo Jusuf - 220711878
 				break;
 			default:
 				printf("\n[!] Menu tidak Ditemukan [!]");
