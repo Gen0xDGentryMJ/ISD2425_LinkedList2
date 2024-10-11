@@ -3,14 +3,13 @@
 int main(int argc, char *argv[]) {
 	List L, history;
 	char menu;
-	string nama, status;
-	address before;
-	string temp;
-	
+	string nama, status, temp;
 	int jarak, bil;
-	
+	address before;
+
 	createEmpty(&L);
 	createEmpty(&history);
+
 	do{
 		system("cls");
 		printData(L);
@@ -19,9 +18,9 @@ int main(int argc, char *argv[]) {
 		printf("\n\t[2]. Hitung Data");
 		printf("\n\t[3]. Hapus Planet");
 		printf("\n\t[4]. Kesimpulan");
-		printf("\n\t[5]. History Senyawa");
+		printf("\n\t[5]. History Planet");
 		printf("\n\t------------------------------");
-		printf("\n\t[6]. Reverse List [Bonus]");//reverse list yaaa reverse list
+		printf("\n\t[6]. Reverse List [Bonus]");//reverse list, mengreverse list yang telah dibuat
 		printf("\n\t[7]. Swap Dari Jarak [Tugas]");//Swap jarak terpendek dengan jarak terpanjang
 		
 		printf("\n\t[0]. Keluar");
@@ -97,7 +96,7 @@ int main(int argc, char *argv[]) {
 				break;
 			case '3':
 				//hanya bisa di akses ketika ada planet
-				if(nbList(L)>=1){
+				if(!isEmpty(L)){
 					printf("\n\tNama Planet yang ingin dihapus: ");fflush(stdin);gets(nama);
 					before = findNodePlanet(L, nama);
 					
@@ -111,13 +110,18 @@ int main(int argc, char *argv[]) {
 					
 					if(menu == 'y'|| menu == 'Y'){
 						printf("\n\t[!] Planet %s telah di hapus [!]",before->namaPlanet);
-						insertLast(&L,before);
+						insertLast(&history,alokasi(before->namaPlanet,before->jarakDariBumi,before->status));
+						// printf("\nada error data");
+
 						if(before == L.first){
 							deleteFirst(&L);
+							// printf("\nada error data1");
 						}else if(before->next==NULL){
 							deleteLast(&L);
+							// printf("\nada error data3");
 						}else{
 							deleteAt(&L,before);
+							// printf("\nada error data2");
 						}
 					}else{
 						printf("\n\t[!] Tidak Jadi Delete Data Planet [!]");
@@ -161,14 +165,13 @@ int main(int argc, char *argv[]) {
 				}
 				break;
 			case '0':
-				printf("\n\n\tSukses terus Penjelajah [NAMA PRAKTIKAN] - [NPM]");//Gentry Marvelo Jusuf - 220711878
+				printf("\n\n\tConnection Lost User [NAMA PRAKTIKAN] - [NPM]");//Gentry Marvelo Jusuf - 220711878
 				break;
 			default:
-				printf("\n[!] Menu tidak Ditemukan [!]");
+				printf("\n\t[!] Menu tidak Ditemukan [!]");
 				break;
 
-		}
-		if(menu!='0') getch();
+		}getch();
 	}while(menu!='0');
 	return 0;
 }

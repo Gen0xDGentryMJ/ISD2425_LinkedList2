@@ -56,7 +56,7 @@ void deleteAt(List *L, address del){
     address P;
     if(!isEmpty(*L)){
         if((*L).first==del){
-            deleteFirst(L);
+            deleteFirst(&(*L));
         }else{
             P=(*L).first;
             while(P->next!=del){
@@ -115,6 +115,25 @@ void printData(List L){
 	}
 }
 
+void printHistoryData(List L){
+	address temp = L.first;
+	if(isEmpty(L)){
+		printf("\n\t[!]Data Masih Kosong[!]");
+	}else{
+		int i=1;
+		printf("\n\t[List]");
+		for(temp = L.first;temp!=NULL;i++){
+			if(i%5==0){
+				printf("\n\t");
+			}
+			printf("[%s-%s-%0.2d]->", temp->namaPlanet,temp->status,temp->jarakDariBumi);
+			temp = temp->next;
+		}
+		printf("[NULL]");
+		
+	}
+}
+
 void kesimpulan(List L){
 	address high = L.first;
 	address low = L.first;
@@ -130,8 +149,9 @@ void kesimpulan(List L){
         curr = curr->next;
     }
 	
-	printf("\n\t Planet dengan jarak terjauh dari bumi: %s dengan biaya peluncuran sebesar Rp %.02d",high->namaPlanet, (high->jarakDariBumi * 15));
-	printf("\n\t Planet dengan jarak pendek dari bumi %s dengan biaya peluncuran sebesar Rp %.02d",low->namaPlanet, (low->jarakDariBumi * 15));
+	printf("\n\t Planet dengan jarak terjauh dari bumi: \n\t\t %s dengan biaya peluncuran sebesar Rp %.02d\n",high->namaPlanet, (high->jarakDariBumi * 15));
+	printf("\n\t Planet dengan jarak pendek dari bumi: \n\t\t %s dengan biaya peluncuran sebesar Rp %.02d\n",low->namaPlanet, (low->jarakDariBumi * 15));
+	printf("\n\n\t Selisih Jarak: %d",(high->jarakDariBumi - low->jarakDariBumi));
 }
 //BONUS
 address ReverseList(List L){

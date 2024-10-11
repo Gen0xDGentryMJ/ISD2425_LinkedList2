@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
 		printf("\n\t[2]. Tampilkan Gerbong ");//read
 		/* menampilkannya seperti model kereta seperti [0] -> [tipeGerbong-nomorGerbong] -> [||||] */
 		printf("\n\t[3]. Servis Gerbong");//
-		printf("\n\t[4]. Update Gerbong");//
+		printf("\n\t[4]. Update Gerbong");//update data 
 		printf("\n\t[5]. Hapus Gerbong");//delete //submenu 0->DeleteFirst, 1->DeleteAt, 2->DeleteLast
 		printf("\n\t------------------------------");
 		printf("\n\t[6]. Delete Duplikat [Bonus]");//delete duplicate kalau tipe gerbong dan id/nomorGerbong yang sama
@@ -117,33 +117,33 @@ int main(int argc, char *argv[]) {
 				break;
 			case '3':
 				//hanya bisa di akses ketika ada planet
-				if(!isEmpty(L)){
-					printf("\n\tNama Planet yang ingin dihapus: ");fflush(stdin);gets(nama);
-					before = findNodePlanet(L, nama);
+				// if(!isEmpty(L)){
+				// 	printf("\n\tNama Planet yang ingin dihapus: ");fflush(stdin);gets(nama);
+				// 	before = findNodePlanet(L, nama);
 					
-					if(before==NULL){
-						printf("\n\t[!] Nama Planet tidak ditemukan [!]");
-						break;
-					}
+				// 	if(before==NULL){
+				// 		printf("\n\t[!] Nama Planet tidak ditemukan [!]");
+				// 		break;
+				// 	}
 					
-					printf("\n\t[!] Yakin ingin menghapus Planet %s? [Y/N]",before->namaPlanet);
-					printf("\n\t>>> ");scanf("%c",&menu);
+				// 	printf("\n\t[!] Yakin ingin menghapus Planet %s? [Y/N]",before->namaPlanet);
+				// 	printf("\n\t>>> ");scanf("%c",&menu);
 					
-					if(menu == 'y'|| menu == 'Y'){
-						printf("\n\t[!] Planet %s telah di hapus [!]",before->namaPlanet);
-						if(before == L.first){
-							deleteFirst(&L);
-						}else if(before->next==NULL){
-							deleteLast(&L);
-						}else{
-							deleteAt(&L,before);
-						}
-					}else{
-						printf("\n\t[!] Tidak Jadi Delete Data Planet [!]");
-					}
-				}else{
-					printf("\n\t[!] Data Masih Kosong [!]");
-				}
+				// 	if(menu == 'y'|| menu == 'Y'){
+				// 		printf("\n\t[!] Planet %s telah di hapus [!]",before->namaPlanet);
+				// 		if(before == L.first){
+				// 			deleteFirst(&L);
+				// 		}else if(before->next==NULL){
+				// 			deleteLast(&L);
+				// 		}else{
+				// 			deleteAt(&L,before);
+				// 		}
+				// 	}else{
+				// 		printf("\n\t[!] Tidak Jadi Delete Data Planet [!]");
+				// 	}
+				// }else{
+				// 	printf("\n\t[!] Data Masih Kosong [!]");
+				// }
 				break;
 			case '4':
 				if(isEmpty(L)){

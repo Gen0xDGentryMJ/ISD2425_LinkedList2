@@ -20,14 +20,14 @@ int main(int argc, char *argv[]) {
 		system("cls");
 		printData(L);
 		printf("\n\n\t[Current Data: ]");
+		
 		if(display.berat != 0){
-			printf("\n\tNama Senyawa: %s", display.namaSenyawa);
-			printf("\n\tKode Senyawa: %s", display.kodeSenyawa);
-			printf("\n\tHarga Senyawa: Rp %.2f ", display.hargaSenyawa);
-			printf("\n\tBerat Senyawa: %0.2dg",display.berat);
+			printf("\n\tNama Senyawa: %s", display.namaSenyawa);//string nama
+			printf("\n\tKode Senyawa: %s", display.kodeSenyawa);//string -> padat/cair/gas
+			printf("\n\tHarga Senyawa: Rp %.2f ", display.hargaSenyawa);//float harga
+			printf("\n\tBerat Senyawa: %0.2dg",display.berat);//int berat per gram
 		}else{
 			printf("\n\t[!] Belum ada data [!]");
-			
 		}
 
 		printf("\n\n\t[Menu Lab Kimia Atmarium]\n");
@@ -37,7 +37,7 @@ int main(int argc, char *argv[]) {
 		printf("\n\t[4]. Next");
 		printf("\n\t[5]. History Senyawa");
 		printf("\n\t------------------------------");
-		printf("\n\t[6]. Delete Semua Duplikat [Bonus]");//delete duplicate
+		printf("\n\t[6]. Delete Semua Duplikat [Bonus]");//delete duplicate 
 		printf("\n\t[7]. Swap Dari Berat [Tugas]");//Swap Berat tertinggi dengan Berat terendah
 		
 		printf("\n\t[0]. Keluar");
@@ -69,20 +69,6 @@ int main(int argc, char *argv[]) {
 						printf("\n\t[!] Invalid, Kode hanya bisa Padat, Cair, atau Gas [!]\n");
 					}
 				}while(1);
-				do{
-					//id
-					printf("\n\tMasukan Id Senyawa: ");scanf("%d",&bil);
-					if(bil>0){
-						//kondisi id benar
-						break;
-					}else{
-						//kondisi id salah
-						printf("\n\t[!] Invalid, Id Harus Lebih Besar dari 0 [!]\n");
-					}
-				}while(1);
-				sprintf(temp, "%d", bil);
-				strcat(kode,"-");
-				strcat(kode,temp);
 				do{
 					//berat
 					printf("\n\tMasukan Berat Senyawa: ");scanf("%d",&berat);
@@ -160,7 +146,7 @@ int main(int argc, char *argv[]) {
 				}
 				break;
 			case '3':
-				//menghitung data planet
+				//hanya bisa di akses minimal 1 data
 				if(isEmpty){
 					printf("\n\t[!] Data Masih Kosong [!]");
 				}else{
@@ -169,6 +155,7 @@ int main(int argc, char *argv[]) {
 				}
 				break;
 			case '4':
+				//hanya bisa di akses minimal 1 data
 				if(isEmpty(L)){
 					printf("\n\t[!] Data Kosong, Masukan Data Telebih Dahulu [!]");
 					break;
@@ -192,7 +179,7 @@ int main(int argc, char *argv[]) {
 				}else if(isOneElement(L)){
 					printf("\n\t[!] Tidak Bisa Melakukan Delete Duplikat [!]");
 				}else{
-					//
+					deleteDupliAll(&L);
 				}
 				break;
 			case '7':

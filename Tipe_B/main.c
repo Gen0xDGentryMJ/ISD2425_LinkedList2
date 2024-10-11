@@ -111,7 +111,7 @@ int main(int argc, char *argv[]) {
 					
 					if(menu == 'y'|| menu == 'Y'){
 						printf("\n\t[!] Baju %s telah di hapus [!]",before->namaBaju);
-						insertLast(&L,before);
+						insertLast(&history,alokasi(before->namaBaju,before->stok,before->ukuran));
 						if(before == L.first){
 							deleteFirst(&L);
 						}else if(before->next==NULL){
