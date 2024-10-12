@@ -38,13 +38,11 @@ void deleteLast(List *L);
 int nbList(List L);
 
 address findNode(List L, string tipe, int nomor);
-address findNodeRandomizer(List L, int i);
 void printData(List L);
-void kesimpulan(List L);
-
+void EditData(List *L, address before, string tipe, int nomor, float harga, int kapasitas );
+void printHistoryData(List L);
 //BONUS
 address ReverseList(List L);
-
 //Tugas
 void swapping1(List *L);
 

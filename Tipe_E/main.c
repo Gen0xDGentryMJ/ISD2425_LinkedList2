@@ -2,25 +2,24 @@
 
 int main(int argc, char *argv[]) {
 	List L, history;
-	Data display;
 	string nama, tipe, temp;
 	int berat,bil;
 	float harga;
 	char menu;
 
 	address before;
-	display = alokasiData("-","-",0,0.0);
+	Data display = alokasiData("-","-",0,0.0);
 	createEmpty(&L);
 	createEmpty(&history);
 	do{
 		system("cls");
 		printData(L, display);
 
-		printf("\n\n\t [Current Data: ]");
-		printf("\n\t Nama Belanjaan: %s", display.namaBelanjaan);
-		printf("\n\t Tipe Belanjaan: %s", display.tipeBelanjaan);
-		printf("\n\t Harga Belanjaan: Rp %.2f ", display.hargaBelanjaan);
-		printf("\n\t Berat Belanjaan: %0.2dkg",display.beratBelanjaan);
+		// printf("\n\n\t [Current Data: ]");
+		// printf("\n\t Nama Belanjaan: %s", display.namaBelanjaan);
+		// printf("\n\t Tipe Belanjaan: %s", display.tipeBelanjaan);
+		// printf("\n\t Harga Belanjaan: Rp %.2f ", display.hargaBelanjaan);
+		// printf("\n\t Berat Belanjaan: %0.2dkg",display.beratBelanjaan);
 
 		printf("\n\n\t [Menu Supermarket AtmaMaret]\n");
 		printf("\n\t [1]. Input Belanjaan");
@@ -137,10 +136,11 @@ int main(int argc, char *argv[]) {
 						}else{
 							deleteAt(&L,before);
 						}
-						if(isEmpty(L)){
-							display = alokasiData("-","-",0,0.0);
-						}else{
+
+						if(!isEmpty(L)){
 							display = alokasiData(L.first->k.namaBelanjaan,L.first->k.tipeBelanjaan, L.first->k.beratBelanjaan, L.first->k.hargaBelanjaan);
+						}else{
+							display = alokasiData("-","-",0,0.0);
 						}
 					}
 				}else{

@@ -95,18 +95,7 @@ address findNode(List L, string tipe, int nomor){
 	return temp;
 	
 }
-address findNodeRandomizer(List L, int i){
-	address temp;
-    int count=0;
-	for(temp = L.first; temp!=NULL; count++){
-        if(count==i){
-            return temp;
-        }
-		temp=temp->next;
-	}
-	return temp;
-	
-}
+
 int nbList(List L){
 	int count=0;
 	address p = L.first;
@@ -116,8 +105,146 @@ int nbList(List L){
 	}
 	return count;
 }
-
-void printData(List L){
-	
+void EditData(List *L, address before, string tipe, int nomor, float harga, int kapasitas ){//done
+	address temp = L->first;
+	if(isEmpty(*L)){
+		printf("\n\t[!]Data Masih Kosong[!]");
+	}else{
+		while(temp!=NULL){
+			if(temp == before){
+				break;
+			}
+			temp = temp->next;
+		}
+		temp->hargaTiket = harga;
+		temp->nomorGerbong = nomor;
+		temp->kapasitas = kapasitas;
+		strcpy(temp->tipeGerbong, tipe);
+	}
+}
+void printHistoryData(List L){//done
+	address temp = L.first;
+	if(isEmpty(L)){
+		printf("\n\t[!]Data Masih Kosong[!]");
+	}else{
+		int i=1;
+		printf("\n\t[List] ");
+		for(temp = L.first;temp!=NULL;i++){
+			if(i%5==0){
+				printf("\n\t");
+			}
+			printf("[%s - %d - %0.2d - Rp. %0.2f]->", temp->tipeGerbong,temp->nomorGerbong,temp->kapasitas,temp->hargaTiket);
+			temp = temp->next;
+		}
+		printf("[NULL]");
+		
+	}
 }
 
+void printData(List L){//done
+    address temp = L.first;
+
+    int i;
+    for(i=0;i<=nbList(L);i++){
+    	if(i==0||temp==NULL||i==nbList(L)+1){
+			printf("\n\t[%d]",i);	
+		}else{
+			printf("\n\t[%d] %s - %d - %.2d => Rp. %0.2f",i,temp->tipeGerbong,temp->nomorGerbong,temp->kapasitas,temp->hargaTiket);
+			
+			temp=temp->next;
+		}
+	}
+}
+
+//BONUS
+// void deleteDupliAll(List *L){//done
+// 	address temp = L->first;
+// 	address nextTemp = NULL;
+// 	for(temp = L->first;temp!=NULL;temp = temp->next){
+// 		for(nextTemp = temp->next; nextTemp!=NULL; nextTemp=nextTemp->next){
+// 			if(strcmpi(temp->tipeGerbong,nextTemp->tipeGerbong)==0&&
+// 			temp->hargaTiket == nextTemp->hargaTiket&&
+// 			temp->kapasitas ==
+// 			 nextTemp->kapasitas&&
+// 			temp->nomorGerbong == nextTemp->nomorGerbong){
+// 				deleteAt(L, nextTemp);
+// 			}
+// 		}
+// 	}
+// }
+address ReverseList(List L){
+	address prev = NULL;
+	address next = NULL;
+	address curr = L.first;
+	
+	while(curr!=NULL){
+		next = curr->next;
+		curr->next = prev;
+		prev = curr;
+		curr = next;
+	}
+	return prev;
+}
+
+//TUGAS
+void swapping1(List *L){
+	address prevHighest = NULL;
+	address prevLowest = NULL;
+	
+    address highest = L->first;
+	address lowest = L->first;
+    
+	address curr = L->first;
+	address prev = NULL;
+	
+	while (curr != NULL) {
+        if (curr->kapasitas > highest->kapasitas) {
+            highest = curr; 
+            prevHighest = prev;
+        }
+        if (curr->kapasitas < lowest->kapasitas) {
+            lowest = curr;
+            prevLowest = prev;
+        }
+        prev = curr; 
+        curr = curr->next;
+    }
+   
+	
+	if (highest == L->first) {
+        L->first = lowest;
+    } else if (lowest == L->first) {
+        L->first = highest;
+    }
+	
+	if(prevHighest == lowest){
+		//berarti lowest bersebelahan sebelum highest
+		address temp = highest->next;
+	    highest->next = lowest->next;
+	    lowest->next = temp;
+		highest->next = lowest;
+		if (prevLowest != NULL) {
+        	prevLowest->next = highest;
+    	}
+	}else if(prevLowest == highest){
+		//berarti lowest bersebelahan sebelum highest
+		address temp = highest->next;
+	    highest->next = lowest->next;
+	    lowest->next = temp;
+		lowest->next = highest;
+		if (prevHighest != NULL) {
+        	prevHighest->next = lowest;
+    	}
+	}else{
+		// menukar pointer
+	    address temp = highest->next;
+	    highest->next = lowest->next;
+	    lowest->next = temp;
+		
+	    if (prevHighest != NULL) prevHighest->next = lowest;
+	    if (prevLowest != NULL) prevLowest->next = highest;
+    	
+	}
+	
+    
+}

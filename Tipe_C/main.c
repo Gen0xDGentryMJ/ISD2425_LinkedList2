@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
 	createEmpty(&history);
 	do{
 		system("cls");
-		printData(L);
+		printData(L,display);
 		// printf("\n\n\t [Current Data: ]");
 		
 		// if(display.berat != 0){
@@ -46,7 +46,7 @@ int main(int argc, char *argv[]) {
 			case '1':
 				//input berdasarkan jarak
 				system("cls");
-				printData(L);
+				printData(L,display);
 				printf("\n\n\tData ingin dimasukan di urutan : ");scanf("%d",&bil);//inputan berdasarkan urutan
 				
 				if(bil<0||bil>nbList(L)+1){
@@ -67,7 +67,7 @@ int main(int argc, char *argv[]) {
 				}while(1);
 				do{
 					//kode
-					printf("\n\t Masukan Kode Senyawa: ");fflush(stdin);gets(kode);
+					printf("\n\t Masukan Kode Senyawa[Padat|Cair|Gas]: ");fflush(stdin);gets(kode);
 					if(strcmpi(kode,"padat")==0||strcmpi(kode,"cair")==0||strcmpi(kode,"gas")==0){
 						//kondisi kode benar
 						break;
@@ -115,7 +115,7 @@ int main(int argc, char *argv[]) {
 						insertAfter(before, alokasi(alokasiData(nama, kode, berat, harga)));
 						printf("\n\t Data Inserted");
 					}
-				}else if(bil == 2){
+				}else{
 					insertLast(&L, alokasi(alokasiData(nama, kode, berat, harga)));
 				}
 				printf("\n\t Data Inserted");
@@ -124,11 +124,11 @@ int main(int argc, char *argv[]) {
 			case '2':
 				//hanya bisa di akses ketika ada data
 				if(!isEmpty(L)){
-					printf("\n\t Nama Senyawa yang ingin dihapus: ");fflush(stdin);gets(nama);
-					before = findNode(L, nama);
+					printf("\n\t Nama Belanjaan yang ingin dihapus: %s ",display.namaSenyawa);
+					before = findNode(L, display.namaSenyawa);
 					
 					if(before==NULL){
-						printf("\n\t [!] Nama Senyawa tidak ditemukan [!]");
+						printf("\n\t [!] Nama Belanjaan tidak ditemukan [!]");
 						break;
 					}
 					
@@ -181,7 +181,7 @@ int main(int argc, char *argv[]) {
 					}while(1);
 					do{
 						//kode
-						printf("\n\t Masukan Kode Senyawa: ");fflush(stdin);gets(kode);
+						printf("\n\t Masukan Kode Senyawa[Padat|Cair|Gas]: ");fflush(stdin);gets(kode);
 						if(strcmpi(kode,"padat")==0||strcmpi(kode,"cair")==0||strcmpi(kode,"gas")==0){
 							//kondisi kode benar
 							break;

@@ -39,12 +39,10 @@ void deleteFirst(List *L);
 void deleteAt(List *L, address del);
 void deleteLast(List *L);
 
-void printData(List L);
+void printData(List L, Data d);
 address findNode(List L, string nama);
  int nbList(List L);
-void printCurrData(List L, Data k);
 void printHistoryData(List L);
-int findInsert(List L, Data data);
 Data geser(List L, Data d);
 
 //BONUS

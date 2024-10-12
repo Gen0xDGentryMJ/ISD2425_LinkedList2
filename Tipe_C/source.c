@@ -155,34 +155,34 @@ Data geser(List L, Data d){
 	}
 	return d;
 }
-void printData(List L){
+void printData(List L, Data d){//done
     address P = L.first;
-	printf("\n\t[First]->");
-	int i=0;
-    while(P!=NULL){
-    	if(i%5==0&&i!=0){
-    		printf("\n\t");
+
+    int i;
+    for(i=0;i<=nbList(L);i++){
+    	if(i==0||P==NULL||i==nbList(L)+1){
+			printf("\n\t[%d]",i);	
+		}else{
+			printf("\n\t[%d] %s - %s - %.2dg => Rp. %0.2f",i,P->k.namaSenyawa,P->k.kodeSenyawa,P->k.berat,P->k.hargaSenyawa);
+			if(strcmp(P->k.namaSenyawa, d.namaSenyawa)==0){
+				printf("  -= Current Data =- ");
+			}
+			P=P->next;
 		}
-		printf("[%s]-> ",P->k.kodeSenyawa);
-    	P=P->next;
-    	i++;
 	}
-	printf("NULL");
-	
 }
 
 
 //BONUS
-void deleteDupliAll(List *L){
+void deleteDupliAll(List *L){//done
 	address temp = L->first;
-	while(temp!=NULL){
-		if(strcmpi(temp->k.kodeSenyawa,temp->next->k.kodeSenyawa)==0){
-			
-			address toDelete = temp->next;
-            temp->next = toDelete->next;
-            free(toDelete); 
-		}else{
-			temp=temp->next;
+	address nextTemp = NULL;
+	for(temp = L->first;temp!=NULL;temp = temp->next){
+		for(nextTemp = temp->next; nextTemp!=NULL; nextTemp=nextTemp->next){
+			if(strcmpi(temp->k.kodeSenyawa,nextTemp->k.kodeSenyawa)==0&&strcmpi(temp->k.namaSenyawa,nextTemp->k.namaSenyawa)==0&&
+			temp->k.berat == nextTemp->k.berat&&temp->k.hargaSenyawa == nextTemp->k.hargaSenyawa){
+				deleteAt(L,nextTemp);
+			}
 		}
 	}
 }
