@@ -115,6 +115,25 @@ void printData(List L){
 	}
 }
 
+void printHistoryData(List L){
+	address temp = L.first;
+	if(isEmpty(L)){
+		printf("\n\t[!]Data Masih Kosong[!]");
+	}else{
+		int i=1;
+		printf("\n\t[List]");
+		for(temp = L.first;temp!=NULL;i++){
+			if(i%5==0){
+				printf("\n\t");
+			}
+			printf("[%s-%s-%0.2d]->", temp->namaBaju,temp->ukuran,temp->stok);
+			temp = temp->next;
+		}
+		printf("[NULL]");
+		
+	}
+}
+
 void kesimpulan(List L){
 	address high = L.first;
 	address low = L.first;
@@ -129,9 +148,10 @@ void kesimpulan(List L){
         }
         curr = curr->next;
     }
-	
 	printf("\n\tBaju dengan Stok Tertinggi: %s dengan Jumlah sebesar Rp %.02d",high->namaBaju, high->stok);
 	printf("\n\tBaju dengan Stok Terendah : %s dengan Jumlah sebesar Rp %.02d",low->namaBaju, low->stok);
+	printf("\n\n\t Selisih harga Stok: %d",(high->stok - low->stok)*15000);
+	
 }
 //BONUS
 address ReverseList(List L){

@@ -84,31 +84,14 @@ void deleteLast(List *L){
     }
 }
 
-// int nbList(List L){
-// 	int count=0;
-// 	address p = L.first;
-// 	while(p!=NULL){
-// 		count+=1;
-// 		p = p->next;
-// 	}
-// 	return count;
-// }
-int findInsert(List L, Data data){
-	address temp = L.first;
-	//1-> data paling kecil 
-	if(temp->k.berat>data.berat&&temp == L.first){
-		return 0;
+int nbList(List L){
+	int count=0;
+	address p = L.first;
+	while(p!=NULL){
+		count+=1;
+		p = p->next;
 	}
-
-	while(temp->next!=NULL){	
-		temp = temp->next;
-	}
-	
-	if(temp->k.berat<data.berat){
-		return 2;
-	}else{
-		return 1;
-	}
+	return count;
 }
 
 address findNode(List L, string nama){
@@ -122,7 +105,56 @@ address findNode(List L, string nama){
 	}
 	return bantu;
 }
+void EditData(List *L, Data k, address before){//done
+	address temp = L->first;
+	if(isEmpty(*L)){
+		printf("\n\t[!]Data Masih Kosong[!]");
+	}else{
+		while(temp!=NULL){
+			if(temp == before){
+				break;
+			}
+			temp = temp->next;
+		}
+		temp->k = k;
+	}
+}
+void printHistoryData(List L){//done
+	address temp = L.first;
+	if(isEmpty(L)){
+		printf("\n\t[!]Data Masih Kosong[!]");
+	}else{
+		int i=1;
+		printf("\n\t[List]");
+		for(temp = L.first;temp!=NULL;i++){
+			if(i%5==0){
+				printf("\n\t");
+			}
+			printf("[%s - %s - %0.2d - %0.2f]->", temp->k.namaSenyawa,temp->k.kodeSenyawa,temp->k.berat,temp->k.hargaSenyawa);
+			temp = temp->next;
+		}
+		printf("[NULL]");
+		
+	}
+}
 
+Data geser(List L, Data d){
+	address temp = findNode(L,d.namaSenyawa);
+	
+	if (temp->next!=NULL){
+		temp = temp->next;
+		strcpy(d.namaSenyawa, temp->k.namaSenyawa);
+		strcpy(d.kodeSenyawa, temp->k.kodeSenyawa);
+		d.berat = temp->k.berat;
+		d.hargaSenyawa = temp->k.hargaSenyawa;
+	}else{
+		strcpy(d.namaSenyawa, L.first->k.namaSenyawa);
+		strcpy(d.kodeSenyawa, L.first->k.kodeSenyawa);
+		d.berat = L.first->k.berat;
+		d.hargaSenyawa = L.first->k.hargaSenyawa;
+	}
+	return d;
+}
 void printData(List L){
     address P = L.first;
 	printf("\n\t[First]->");
@@ -138,84 +170,7 @@ void printData(List L){
 	printf("NULL");
 	
 }
-Data geser(List L, Data d){
-	address temp = L.first;
-	while (temp!=NULL){
-		if(strcmpi(temp->k.namaSenyawa, d.namaSenyawa)==0){
-			if (temp->next!=NULL){
-				/*
-				misal data
-				1
-				2 -> current temp.k.namasenyawa == d.namaSenyawa
-				3 
-				*/
-				temp = temp->next;
-				/*
-				misal data
-				1
-				2 d.namaSenyawa
-				3 -> current temp
-				*/
-				strcpy(d.namaSenyawa, temp->k.namaSenyawa);
-				strcpy(d.kodeSenyawa, temp->k.kodeSenyawa);
-				d.berat = temp->k.berat;
-				d.hargaSenyawa = temp->k.hargaSenyawa;
-				/*
-				misal data
-				1
-				2 
-				3 -> current temp.k.namasenyawa == d.namaSenyawa
-				*/
-			}else{
-				strcpy(d.namaSenyawa, L.first->k.namaSenyawa);
-				strcpy(d.kodeSenyawa, L.first->k.kodeSenyawa);
-				d.berat = L.first->k.berat;
-				d.hargaSenyawa = L.first->k.hargaSenyawa;
-			}
-		}
-		temp = temp->next;
-	}
-	return d;
-}
-void printCurrData(List L, Data k){
-	address temp = L.first;
-	if(isEmpty(L)){
-		printf("\n\t[!]Data Masih Kosong[!]");
-	}else{
-		printf("\n\tNama Senyawa: %s", k.namaSenyawa);
-		printf("\n\tKode Senyawa: %s", k.kodeSenyawa);
-		printf("\n\tHarga Senyawa: Rp %.2f ", k.hargaSenyawa);
-		printf("\n\tBerat Senyawa: %0.2dg",k.berat);
-		while (temp!=NULL){
-			if(strcmpi(temp->k.namaSenyawa, k.namaSenyawa)!=0){
-				printf("\n\tNama Senyawa: %s", temp->k.namaSenyawa);
-				printf("\n\tKode Senyawa: %s", temp->k.kodeSenyawa);
-				printf("\n\tHarga Senyawa: Rp %.2f ", temp->k.hargaSenyawa);
-				printf("\n\tBerat Senyawa: %0.2d g",temp->k.berat);
-			}
-			temp = temp->next;
-		}
-		
-	}
-}
-void printHistoryData(List L){
-	address temp = L.first;
-	if(isEmpty(L)){
-		printf("\n\t[!]Data Masih Kosong[!]");
-	}else{
-		int i=1;
-		printf("\n\t[List]->");
-		for(temp = L.first;temp!=NULL;i++){
-			if(i%5==0){
-				printf("\n\t->");
-			}
-			printf("[%s-%s-%0.2dg-Rp %.2f]->", temp->k.namaSenyawa,temp->k.kodeSenyawa,temp->k.berat,temp->k.hargaSenyawa);
-			temp = temp->next;
-		}
-		printf("[NULL]");
-		
-	}
-}
+
 
 //BONUS
 void deleteDupliAll(List *L){

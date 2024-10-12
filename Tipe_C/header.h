@@ -41,7 +41,7 @@ void deleteLast(List *L);
 
 void printData(List L);
 address findNode(List L, string nama);
-// int nbList(List L);
+ int nbList(List L);
 void printCurrData(List L, Data k);
 void printHistoryData(List L);
 int findInsert(List L, Data data);

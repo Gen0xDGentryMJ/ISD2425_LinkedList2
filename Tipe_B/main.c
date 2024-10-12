@@ -7,7 +7,6 @@ int main(int argc, char *argv[]) {
 	string ukuran;
 	address before;
 	string temp;
-	
 	int stok, bil;
 	
 	createEmpty(&L);
@@ -147,7 +146,7 @@ int main(int argc, char *argv[]) {
 					printf("\n\t[!] Tidak Bisa Melakukan Reverse List [!]");
 				}else{
 					L.first = ReverseList(L);
-					printf("\n\tBerhasil Reverse");
+					printf("\n\t Berhasil Reverse");
 				}
 				break;
 			case '7':

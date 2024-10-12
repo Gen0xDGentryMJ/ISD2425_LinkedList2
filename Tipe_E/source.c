@@ -1,37 +1,37 @@
 #include "header.h"
 
-void createEmpty(List *L){
+void createEmpty(List *L){//done
 	L->first = NULL;
 }
-bool isEmpty(List L){
+bool isEmpty(List L){//done
 	return L.first == NULL;
 }
-bool isOneElement(List L){
+bool isOneElement(List L){//done
     return !isEmpty(L)&&L.first->next==NULL;
 }
-Data alokasiData(string nama, string kode, int berat, float harga){
+Data alokasiData(string nama, string tipe, int berat, float harga){//done
 	Data data;
-	strcpy(data.namaSenyawa,nama);
-	strcpy(data.kodeSenyawa,kode);
-	data.berat=berat;
-	data.hargaSenyawa=harga;
+	strcpy(data.namaBelanjaan,nama);
+	strcpy(data.tipeBelanjaan,tipe);
+	data.beratBelanjaan=berat;
+	data.hargaBelanjaan=harga;
 	return data;
 }
 
-address alokasi(Data data){
+address alokasi(Data data){//done
 	address temp;
-	temp = (BahanKimia*) malloc(sizeof(BahanKimia));
+	temp = (Belanja*) malloc(sizeof(Belanja));
 	temp->k= data;
 	temp->next=NULL;
 	
 	return temp;
 }
 
-void insertFirst(List *L, address newNode){
+void insertFirst(List *L, address newNode){//done
 	newNode->next = L->first;
 	L->first = newNode;
 }
-void insertLast(List *L, address newNode){
+void insertLast(List *L, address newNode){//done
 	address temp = L->first;
 	if(isEmpty(*L)){
 		insertFirst(&(*L), newNode);
@@ -42,13 +42,13 @@ void insertLast(List *L, address newNode){
 		temp->next = newNode;
 	}
 }
-void insertAfter(address before, address newNode){
+void insertAfter(address before, address newNode){//done
     if(before!=NULL){
         newNode->next = before->next;
         before->next = newNode;
     }
 }
-void deleteFirst(List *L){
+void deleteFirst(List *L){//done
     if(!isEmpty(*L)){
         address del = (*L).first;
         (*L).first = (*L).first->next;
@@ -56,7 +56,7 @@ void deleteFirst(List *L){
     }
 
 }
-void deleteAt(List *L, address del){
+void deleteAt(List *L, address del){//done
     address P;
     if(!isEmpty(*L)){
         if((*L).first==del){
@@ -71,7 +71,7 @@ void deleteAt(List *L, address del){
         }
     }
 }
-void deleteLast(List *L){
+void deleteLast(List *L){//done
     address P;
     if(!isEmpty(*L)){
         if(isOneElement(*L)){
@@ -84,29 +84,13 @@ void deleteLast(List *L){
     }
 }
 
-int findInsert(List L, Data data){
-	address temp = L.first;
-	//1-> data paling kecil 
-	if(temp->k.berat>data.berat&&temp == L.first){
-		return 0;
-	}
 
-	while(temp->next!=NULL){	
-		temp = temp->next;
-	}
-	
-	if(temp->k.berat<data.berat){
-		return 2;
-	}else{
-		return 1;
-	}
-}
 
-address findNode(List L, string nama){
+address findNode(List L, string nama){//done
 	address bantu = L.first;
 	while (bantu!=NULL)
 	{
-		if (strcmpi(bantu->k.namaSenyawa, nama)==0){
+		if (strcmpi(bantu->k.namaBelanjaan, nama)==0){
 			return bantu;
 		}
 		bantu=bantu->next;
@@ -114,78 +98,35 @@ address findNode(List L, string nama){
 	return bantu;
 }
 
-void printData(List L){
+void printData(List L, Data d){//done
     address P = L.first;
-	printf("\n\t[First]->");
-	int i=0;
-    while(P!=NULL){
-    	if(i%5==0&&i!=0){
-    		printf("\n\t");
-		}
-		printf("[%s]-> ",P->k.kodeSenyawa);
-    	P=P->next;
-    	i++;
-	}
-	printf("NULL");
-	
-}
-Data geser(List L, Data d){
-	address temp = L.first;
-	while (temp!=NULL){
-		if(strcmpi(temp->k.namaSenyawa, d.namaSenyawa)==0){
-			if (temp->next!=NULL){
-			
-				temp = temp->next;
-				
-				strcpy(d.namaSenyawa, temp->k.namaSenyawa);
-				strcpy(d.kodeSenyawa, temp->k.kodeSenyawa);
-				d.berat = temp->k.berat;
-				d.hargaSenyawa = temp->k.hargaSenyawa;
-				
-			}else{
-				strcpy(d.namaSenyawa, L.first->k.namaSenyawa);
-				strcpy(d.kodeSenyawa, L.first->k.kodeSenyawa);
-				d.berat = L.first->k.berat;
-				d.hargaSenyawa = L.first->k.hargaSenyawa;
+
+    int i;
+    for(i=0;i<=nbList(L);i++){
+    	if(i==0||P==NULL||i==nbList(L)+1){
+			printf("\n\t[%d]",i);	
+		}else{
+			printf("\n\t[%d] %s - %s - %.2dkg => Rp. %0.2f",i,P->k.namaBelanjaan,P->k.tipeBelanjaan,P->k.beratBelanjaan,P->k.hargaBelanjaan);
+			if(strcmpi(P->k.namaBelanjaan, d.namaBelanjaan)==0){
+				printf("  -= Current Data =- ");
 			}
+			P=P->next;
 		}
-		temp = temp->next;
-	}
-	return d;
-}
-void printCurrData(List L, Data k){
-	address temp = L.first;
-	if(isEmpty(L)){
-		printf("\n\t[!]Data Masih Kosong[!]");
-	}else{
-		printf("\n\tNama Senyawa: %s", k.namaSenyawa);
-		printf("\n\tKode Senyawa: %s", k.kodeSenyawa);
-		printf("\n\tHarga Senyawa: Rp %.2f ", k.hargaSenyawa);
-		printf("\n\tBerat Senyawa: %0.2dg",k.berat);
-		while (temp!=NULL){
-			if(strcmpi(temp->k.namaSenyawa, k.namaSenyawa)!=0){
-				printf("\n\tNama Senyawa: %s", temp->k.namaSenyawa);
-				printf("\n\tKode Senyawa: %s", temp->k.kodeSenyawa);
-				printf("\n\tHarga Senyawa: Rp %.2f ", temp->k.hargaSenyawa);
-				printf("\n\tBerat Senyawa: %0.2d g",temp->k.berat);
-			}
-			temp = temp->next;
-		}
-		
 	}
 }
-void printHistoryData(List L){
+
+void printHistoryData(List L){//done
 	address temp = L.first;
 	if(isEmpty(L)){
 		printf("\n\t[!]Data Masih Kosong[!]");
 	}else{
 		int i=1;
-		printf("\n\t[List]->");
+		printf("\n\t[List]");
 		for(temp = L.first;temp!=NULL;i++){
 			if(i%5==0){
-				printf("\n\t->");
+				printf("\n\t");
 			}
-			printf("[%s-%s-%0.2dg-Rp %.2f]->", temp->k.namaSenyawa,temp->k.kodeSenyawa,temp->k.berat,temp->k.hargaSenyawa);
+			printf("[%s - %s - %0.2d - %0.2f]->", temp->k.namaBelanjaan,temp->k.tipeBelanjaan,temp->k.beratBelanjaan,temp->k.hargaBelanjaan);
 			temp = temp->next;
 		}
 		printf("[NULL]");
@@ -193,23 +134,63 @@ void printHistoryData(List L){
 	}
 }
 
-//BONUS
-void deleteDupliAll(List *L){
+Data geser(List L, Data d){
+	address temp = findNode(L,d.namaBelanjaan);
+	
+	if (temp->next!=NULL){
+		temp = temp->next;
+		strcpy(d.namaBelanjaan, temp->k.namaBelanjaan);
+		strcpy(d.tipeBelanjaan, temp->k.tipeBelanjaan);
+		d.beratBelanjaan = temp->k.beratBelanjaan;
+		d.hargaBelanjaan = temp->k.hargaBelanjaan;
+	}else{
+		strcpy(d.namaBelanjaan, L.first->k.namaBelanjaan);
+		strcpy(d.tipeBelanjaan, L.first->k.tipeBelanjaan);
+		d.beratBelanjaan = L.first->k.beratBelanjaan;
+		d.hargaBelanjaan = L.first->k.hargaBelanjaan;
+	}
+	return d;
+}
+void EditData(List *L, Data k, address before){//done
 	address temp = L->first;
-	while(temp!=NULL){
-		if(strcmpi(temp->k.kodeSenyawa,temp->next->k.kodeSenyawa)==0&&strcmpi(temp->k.namaSenyawa,temp->next->k.namaSenyawa)==0){
-			
-			address toDelete = temp->next;
-            temp->next = toDelete->next;
-            free(toDelete); 
-		}else{
-			temp=temp->next;
+	if(isEmpty(*L)){
+		printf("\n\t[!]Data Masih Kosong[!]");
+	}else{
+		while(temp!=NULL){
+			if(temp == before){
+				break;
+			}
+			temp = temp->next;
+		}
+		temp->k = k;
+	}
+}
+int nbList(List L){//done
+	int count=0;
+	address p = L.first;
+	while(p!=NULL){
+		count+=1;
+		p = p->next;
+	}
+	return count;
+}
+
+//BONUS
+void deleteDupliAll(List *L){//done
+	address temp = L->first;
+	address nextTemp = NULL;
+	for(temp = L->first;temp!=NULL;temp = temp->next){
+		for(nextTemp = temp->next; nextTemp!=NULL; nextTemp=nextTemp->next){
+			if(strcmpi(temp->k.tipeBelanjaan,nextTemp->k.tipeBelanjaan)==0&&strcmpi(temp->k.namaBelanjaan,nextTemp->k.namaBelanjaan)==0&&
+			temp->k.beratBelanjaan == nextTemp->k.beratBelanjaan&&temp->k.hargaBelanjaan == nextTemp->k.hargaBelanjaan){
+				deleteAt(L,nextTemp);
+			}
 		}
 	}
 }
 
 //TUGAS
-void swapping1(List *L){
+void swapping1(List *L){//done
 	address prevHighest = NULL;
 	address prevLowest = NULL;
 	
@@ -220,11 +201,11 @@ void swapping1(List *L){
 	address prev = NULL;
 	
 	while (curr != NULL) {
-        if (curr->k.berat > highest->k.berat) {
+        if (curr->k.beratBelanjaan > highest->k.beratBelanjaan) {
             highest = curr; 
             prevHighest = prev;
         }
-        if (curr->k.berat < lowest->k.berat) {
+        if (curr->k.beratBelanjaan < lowest->k.beratBelanjaan) {
             lowest = curr;
             prevLowest = prev;
         }

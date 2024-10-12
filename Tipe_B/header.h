@@ -35,6 +35,7 @@ void deleteLast(List *L);
 int nbList(List L);
 address findNodeBaju(List L, string nama);
 void printData(List L);
+void printHistoryData(List L);
 void kesimpulan(List L);
 //BONUS
 address ReverseList(List L);

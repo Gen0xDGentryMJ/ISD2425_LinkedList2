@@ -38,6 +38,7 @@ int nbList(List L);
 address findNodePlanet(List L, string nama);
 void printData(List L);
 void kesimpulan(List L);
+void printHistoryData(List L);
 //BONUS
 address ReverseList(List L);
 
