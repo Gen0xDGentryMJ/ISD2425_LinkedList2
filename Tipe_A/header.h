@@ -4,45 +4,44 @@
 #include <conio.h>
 #include <string.h>
 
-typedef char string[50];
-
-typedef struct{
-	string nama;
-	//baju int stok
-}Tipe_Baju;
-typedef struct{
-	string bahan;//katun wol nilon 
-	string tipe[5];
-	float harga;
-}Baju;
+typedef char string[64];
 
 typedef struct node *address;
 
 typedef struct node{
-	Baju b;
-    address next;
-}node;
+	string namaPlanet;// contoh: bumi, mars, jupiter
+	//nama tidak boleh kosong atau -
+	int jarakDariBumi;// dihitung /km, contoh: input 1 => tampilan 1 km
+	//jarak tidak boleh lebih kecil dari 1 (input minimal 1)
+	string status;//status ada 3(aman, berbahaya, mematikan)
+	address	next;
+}Planet;
 
 typedef struct{
-    address first;
+	address first;
 }List;
 
 void createEmpty(List *L);
 bool isEmpty(List L);
 bool isOneElement(List L);
-address alokasi(string bahan, string merk, float harga);
+address alokasi(string nama, int jarak, string status);
+
 void insertFirst(List *L, address newNode);
 void insertAfter(address before, address newNode);
-void insertLast(List *L,address newNode);
+void insertLast(List *L, address newNode);
+
 void deleteFirst(List *L);
 void deleteAt(List *L, address del);
 void deleteLast(List *L);
-void printData(List L);
-address findNode(List L, int bil);
-address findMerk(List L, string merk);
+
 int nbList(List L);
-//////////
-address findHighestData(List L);
-address findLowestData(List L);
-void kesimpulan(List *L);
+address findNodePlanet(List L, string nama);
+void printData(List L);
+void kesimpulan(List L);
+void printHistoryData(List L);
+//BONUS
+address ReverseList(List L);
+
+//Tugas
+void swapping1(List *L);
 
